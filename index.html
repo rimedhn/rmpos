@@ -1,85 +1,257 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "/components/ui/card"
-import { Input } from "/components/ui/input"
-import { Label } from "/components/ui/label"
-import { Users } from "lucide-react"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+        }
 
-export default function PriceCalculator() {
-  const [userCount, setUserCount] = useState<number>(3)
-  const basePrice = 990
-  const pricePerAdditionalUser = 330
-  const includedUsers = 3
+        .card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 640px;
+            margin: 2rem;
+        }
 
-  const handleUserCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value)
-    if (!isNaN(value) && value >= 0) {
-      setUserCount(value)
-    }
-  }
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
 
-  const additionalUsers = Math.max(0, userCount - includedUsers)
-  const additionalCost = additionalUsers * pricePerAdditionalUser
-  const totalPrice = basePrice + additionalCost
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-  return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold flex items-center gap-2">
-          <Users className="w-5 h-5" />
-          Pricing Calculator
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <span className="text-sm text-gray-500">Base price (3 users included)</span>
-            <span className="font-medium">L{basePrice}/month</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-sm text-gray-500">Additional users ({additionalUsers} × L{pricePerAdditionalUser})</span>
-            <span className="font-medium">L{additionalCost}</span>
-          </div>
-          <div className="border-t pt-2 mt-2 flex justify-between">
-            <span className="font-medium">Total</span>
-            <span className="font-bold text-lg">L{totalPrice}/month</span>
-          </div>
+        .users-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #4b5563;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+
+        .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: 0.5rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .text-gray-500 {
+            color: #6b7280;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .border-t {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .pt-2 {
+            padding-top: 0.5rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+
+        .label {
+            display: block;
+            font-size: 0.875rem;
+            line-height: 1.5rem;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: #374151;
+            box-sizing: border-box;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .space-y-1 > * + * {
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="users-icon">
+                    <path d="M16.5 6a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.312 12.375a9 9 0 00-16.624 0 .75.75 0 00-.012 1.364l.138.022c.188.03.382.017.56-.03L5.65 14.01a8.25 8.25 0 0112.701 0l1.301-1.629a.75.75 0 00-.572-1.334l-.136-.022a.75.75 0 00-.014-1.364zM22 21a1 1 0 001-1v-2a7 7 0 00-7-7h-4a7 7 0 00-7 7v2a1 1 0 001 1h12z" />
+                </svg>
+                Pricing Calculator
+            </div>
         </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="users">Number of users</Label>
-          <Input
-            id="users"
-            type="number"
-            min="0"
-            value={userCount}
-            onChange={handleUserCountChange}
-            className="w-full"
-          />
-          {userCount < 3 && (
-            <p className="text-sm text-gray-500">
-              Minimum of 3 users included in base price
-            </p>
-          )}
+        <div class="card-content space-y-6">
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-500">Base price (3 users included)</span>
+                    <span class="font-medium">L<span id="basePrice">990</span>/month</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-500">Additional users (<span id="additionalUsersCount">0</span> × L<span id="pricePerAdditionalUser">330</span>)</span>
+                    <span class="font-medium">L<span id="additionalCost">0</span></span>
+                </div>
+                <div class="border-t pt-2 mt-2 flex justify-between">
+                    <span class="font-medium">Total</span>
+                    <span class="font-bold text-lg">L<span id="totalPrice">990</span>/month</span>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <label class="label" for="users">Number of users</label>
+                <input
+                    class="input w-full"
+                    id="users"
+                    type="number"
+                    min="0"
+                    value="3"
+                    onchange="updatePrice(this.value)"
+                />
+                <p id="minimumUsers" class="text-sm text-gray-500" style="display:none;">
+                    Minimum of 3 users included in base price
+                </p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-medium mb-2">Price breakdown</h3>
+                <ul class="ul space-y-1 text-sm">
+                    <li class="flex justify-between">
+                        <span>Base price (3 users):</span>
+                        <span>L<span id="breakdownBasePrice">990</span></span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span>Additional users (<span id="breakdownAdditionalUsersCount">0</span>):</span>
+                        <span>L<span id="breakdownAdditionalCost">0</span></span>
+                    </li>
+                    <li class="flex justify-between font-medium pt-2 border-t">
+                        <span>Total:</span>
+                        <span>L<span id="breakdownTotalPrice">990</span>/month</span>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </div>
 
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="font-medium mb-2">Price breakdown</h3>
-          <ul className="space-y-1 text-sm">
-            <li className="flex justify-between">
-              <span>Base price (3 users):</span>
-              <span>L{basePrice}</span>
-            </li>
-            <li className="flex justify-between">
-              <span>Additional users ({additionalUsers}):</span>
-              <span>L{additionalCost}</span>
-            </li>
-            <li className="flex justify-between font-medium pt-2 border-t">
-              <span>Total:</span>
-              <span>L{totalPrice}/month</span>
-            </li>
-          </ul>
-        </div>
-      </CardContent>
-    </Card>
-  )
-}
+    <script>
+        const basePrice = 990;
+        const pricePerAdditionalUser = 330;
+        const includedUsers = 3;
+
+        function updatePrice(userCount) {
+            const parsedUserCount = parseInt(userCount);
+            let validUserCount = isNaN(parsedUserCount) ? 0 : parsedUserCount;
+            if (validUserCount < 0) {
+                validUserCount = 0;
+            }
+
+            const additionalUsers = Math.max(0, validUserCount - includedUsers);
+            const additionalCost = additionalUsers * pricePerAdditionalUser;
+            const totalPrice = basePrice + additionalCost;
+
+            document.getElementById('additionalUsersCount').textContent = additionalUsers;
+            document.getElementById('additionalCost').textContent = additionalCost;
+            document.getElementById('totalPrice').textContent = totalPrice;
+            document.getElementById('breakdownAdditionalUsersCount').textContent = additionalUsers;
+            document.getElementById('breakdownAdditionalCost').textContent = additionalCost;
+            document.getElementById('breakdownTotalPrice').textContent = totalPrice;
+
+            const minimumUsersMessage = document.getElementById('minimumUsers');
+            if (validUserCount < 3) {
+                minimumUsersMessage.style.display = 'block';
+            } else {
+                minimumUsersMessage.style.display = 'none';
+            }
+        }
+
+        // Initialize with the default user count
+        updatePrice(document.getElementById('users').value);
+    </script>
+</body>
+</html>
