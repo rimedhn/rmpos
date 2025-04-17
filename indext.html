@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Calculator with Branches</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 640px;
+            margin: 2rem;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .branch-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: #4b5563;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+
+        .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: 0.5rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .text-gray-500 {
+            color: #6b7280;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .border-t {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .pt-2 {
+            padding-top: 0.5rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+
+        .label {
+            display: block;
+            font-size: 0.875rem;
+            line-height: 1.5rem;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: #374151;
+            box-sizing: border-box;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+
+        .bg-gray-50 {
+            background-color: #f9fafb;
+        }
+
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .space-y-1 > * + * {
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="branch-icon">
+                    <path d="M12 2a5 5 0 00-5 5v11a5 5 0 0010 0V7a5 5 0 00-5-5zM9.5 16.5H7v-2h2.5v2zm0-3H7v-2h2.5v2zm5 3h-2.5v-2H17v2zm0-3h-2.5v-2H17v2z" />
+                </svg>
+                Pricing Calculator with Branches
+            </div>
+        </div>
+        <div class="card-content space-y-6">
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-500">Base price per branch (includes 3 users)</span>
+                    <span class="font-medium">L<span id="basePricePerBranch">990</span>/month</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-500">Number of branches</span>
+                    <span class="font-medium"><span id="numberOfBranchesDisplay">1</span></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-500">Included users (<span id="includedUsersDisplay">3</span>)</span>
+                    <span class="font-medium"><span id="totalIncludedUsers">3</span></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-500">Additional users (L<span id="pricePerAdditionalUser">300</span>/user)</span>
+                    <span class="font-medium">L<span id="additionalUserCost">0</span></span>
+                </div>
+                <div class="border-t pt-2 mt-2 flex justify-between">
+                    <span class="font-medium">Total</span>
+                    <span class="font-bold text-lg">L<span id="totalPrice">990</span>/month</span>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <label class="label" for="branches">Number of branches</label>
+                <input
+                    class="input w-full"
+                    id="branches"
+                    type="number"
+                    min="1"
+                    value="1"
+                    onchange="updatePrice()"
+                />
+                <label class="label" for="additionalUsers">Additional users</label>
+                <input
+                    class="input w-full"
+                    id="additionalUsers"
+                    type="number"
+                    min="0"
+                    value="0"
+                    onchange="updatePrice()"
+                />
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-medium mb-2">Price breakdown</h3>
+                <ul class="ul space-y-1 text-sm">
+                    <li class="flex justify-between">
+                        <span>Base price (<span id="breakdownNumberOfBranches">1</span> branch):</span>
+                        <span>L<span id="breakdownBasePrice">990</span></span>
+                    </li>
+                    <li class="flex justify-between">
+                        <span>Additional users (<span id="breakdownAdditionalUsersCount">0</span> × L<span id="breakdownPricePerAdditionalUser">300</span>):</span>
+                        <span>L<span id="breakdownAdditionalUserCost">0</span></span>
+                    </li>
+                    <li class="flex justify-between font-medium pt-2 border-t">
+                        <span>Total:</span>
+                        <span>L<span id="breakdownTotalPrice">990</span>/month</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const basePricePerBranch = 990;
+        const pricePerAdditionalUser = 300;
+        const usersPerBranch = 3;
+
+        function updatePrice() {
+            const numberOfBranches = parseInt(document.getElementById('branches').value);
+            const additionalUsers = parseInt(document.getElementById('additionalUsers').value);
+
+            const totalBasePrice = numberOfBranches * basePricePerBranch;
+            const totalIncludedUsers = numberOfBranches * usersPerBranch;
+            const additionalUserCost = additionalUsers * pricePerAdditionalUser;
+            const totalPrice = totalBasePrice + additionalUserCost;
+
+            document.getElementById('numberOfBranchesDisplay').textContent = numberOfBranches;
+            document.getElementById('totalIncludedUsers').textContent = totalIncludedUsers;
+            document.getElementById('additionalUserCost').textContent = additionalUserCost;
+            document.getElementById('totalPrice').textContent = totalPrice;
+
+            document.getElementById('breakdownNumberOfBranches').textContent = numberOfBranches;
+            document.getElementById('breakdownBasePrice').textContent = totalBasePrice;
+            document.getElementById('breakdownAdditionalUsersCount').textContent = additionalUsers;
+            document.getElementById('breakdownPricePerAdditionalUser').textContent = pricePerAdditionalUser;
+            document.getElementById('breakdownAdditionalUserCost').textContent = additionalUserCost;
+            document.getElementById('breakdownTotalPrice').textContent = totalPrice;
+        }
+
+        // Initialize with the default values
+        updatePrice();
+    </script>
+</body>
+</html>
