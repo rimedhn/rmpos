@@ -1,0 +1,85 @@
+import { useState } from 'react'
+import { Card, CardContent, CardHeader, CardTitle } from "/components/ui/card"
+import { Input } from "/components/ui/input"
+import { Label } from "/components/ui/label"
+import { Users } from "lucide-react"
+
+export default function PriceCalculator() {
+  const [userCount, setUserCount] = useState<number>(3)
+  const basePrice = 990
+  const pricePerAdditionalUser = 330
+  const includedUsers = 3
+
+  const handleUserCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value)
+    if (!isNaN(value) && value >= 0) {
+      setUserCount(value)
+    }
+  }
+
+  const additionalUsers = Math.max(0, userCount - includedUsers)
+  const additionalCost = additionalUsers * pricePerAdditionalUser
+  const totalPrice = basePrice + additionalCost
+
+  return (
+    <Card className="w-full max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold flex items-center gap-2">
+          <Users className="w-5 h-5" />
+          Pricing Calculator
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-500">Base price (3 users included)</span>
+            <span className="font-medium">L{basePrice}/month</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-sm text-gray-500">Additional users ({additionalUsers} × L{pricePerAdditionalUser})</span>
+            <span className="font-medium">L{additionalCost}</span>
+          </div>
+          <div className="border-t pt-2 mt-2 flex justify-between">
+            <span className="font-medium">Total</span>
+            <span className="font-bold text-lg">L{totalPrice}/month</span>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="users">Number of users</Label>
+          <Input
+            id="users"
+            type="number"
+            min="0"
+            value={userCount}
+            onChange={handleUserCountChange}
+            className="w-full"
+          />
+          {userCount < 3 && (
+            <p className="text-sm text-gray-500">
+              Minimum of 3 users included in base price
+            </p>
+          )}
+        </div>
+
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="font-medium mb-2">Price breakdown</h3>
+          <ul className="space-y-1 text-sm">
+            <li className="flex justify-between">
+              <span>Base price (3 users):</span>
+              <span>L{basePrice}</span>
+            </li>
+            <li className="flex justify-between">
+              <span>Additional users ({additionalUsers}):</span>
+              <span>L{additionalCost}</span>
+            </li>
+            <li className="flex justify-between font-medium pt-2 border-t">
+              <span>Total:</span>
+              <span>L{totalPrice}/month</span>
+            </li>
+          </ul>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
