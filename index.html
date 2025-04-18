@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing Calculator with Branches</title>
+    <title>RMPOS</title>
     <style>
         body {
             font-family: sans-serif;
@@ -167,34 +167,34 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="branch-icon">
                     <path d="M12 2a5 5 0 00-5 5v11a5 5 0 0010 0V7a5 5 0 00-5-5zM9.5 16.5H7v-2h2.5v2zm0-3H7v-2h2.5v2zm5 3h-2.5v-2H17v2zm0-3h-2.5v-2H17v2z" />
                 </svg>
-                Pricing Calculator with Branches
+                CALCULADORA DE PRECIOS POR SUCURSAL
             </div>
         </div>
         <div class="card-content space-y-6">
             <div class="space-y-2">
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Base price per branch (includes 3 users)</span>
-                    <span class="font-medium">L<span id="basePricePerBranch">990</span>/month</span>
+                    <span class="text-sm text-gray-500">PRECIO BASE POR SUCURSAL (incluídos 3 usuarios)</span>
+                    <span class="font-medium">L<span id="basePricePerBranch">990</span>/mes</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Number of branches</span>
+                    <span class="text-sm text-gray-500">CANTIDAD DE SUCURSALES</span>
                     <span class="font-medium"><span id="numberOfBranchesDisplay">1</span></span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Included users (<span id="includedUsersDisplay">3</span>)</span>
+                    <span class="text-sm text-gray-500">USUARIOS INCLUÍDOS (<span id="includedUsersDisplay">3</span>)</span>
                     <span class="font-medium"><span id="totalIncludedUsers">3</span></span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Additional users (L<span id="pricePerAdditionalUser">300</span>/user)</span>
+                    <span class="text-sm text-gray-500">USUARIOS ADICIONALES (L<span id="pricePerAdditionalUser">300</span>/usuarios)</span>
                     <span class="font-medium">L<span id="additionalUserCost">0</span></span>
                 </div>
                 <div class="border-t pt-2 mt-2 flex justify-between">
                     <span class="font-medium">Total</span>
-                    <span class="font-bold text-lg">L<span id="totalPrice">990</span>/month</span>
+                    <span class="font-bold text-lg">L<span id="totalPrice">990</span>/mes</span>
                 </div>
             </div>
             <div class="space-y-2">
-                <label class="label" for="branches">Number of branches</label>
+                <label class="label" for="branches">SUCURSALES</label>
                 <input
                     class="input w-full"
                     id="branches"
@@ -203,7 +203,7 @@
                     value="1"
                     onchange="updatePrice()"
                 />
-                <label class="label" for="additionalUsers">Additional users</label>
+                <label class="label" for="additionalUsers">USUARIOS ADICIONALES</label>
                 <input
                     class="input w-full"
                     id="additionalUsers"
@@ -214,19 +214,19 @@
                 />
             </div>
             <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="font-medium mb-2">Price breakdown</h3>
+                <h3 class="font-medium mb-2">RESUMEN</h3>
                 <ul class="ul space-y-1 text-sm">
                     <li class="flex justify-between">
-                        <span>Base price (<span id="breakdownNumberOfBranches">1</span> branch):</span>
+                        <span>PRECIO BASE (<span id="breakdownNumberOfBranches">1</span> SUCURSAL):</span>
                         <span>L<span id="breakdownBasePrice">990</span></span>
                     </li>
                     <li class="flex justify-between">
-                        <span>Additional users (<span id="breakdownAdditionalUsersCount">0</span> × L<span id="breakdownPricePerAdditionalUser">300</span>):</span>
+                        <span>USUARIOS ADICIONALES (<span id="breakdownAdditionalUsersCount">0</span> × L<span id="breakdownPricePerAdditionalUser">300</span>):</span>
                         <span>L<span id="breakdownAdditionalUserCost">0</span></span>
                     </li>
                     <li class="flex justify-between font-medium pt-2 border-t">
                         <span>Total:</span>
-                        <span>L<span id="breakdownTotalPrice">990</span>/month</span>
+                        <span>L<span id="breakdownTotalPrice">990</span>/mes</span>
                     </li>
                 </ul>
             </div>
