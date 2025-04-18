@@ -191,24 +191,24 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="branch-icon">
                     <path d="M12 2a5 5 0 00-5 5v11a5 5 0 0010 0V7a5 5 0 00-5-5zM9.5 16.5H7v-2h2.5v2zm0-3H7v-2h2.5v2zm5 3h-2.5v-2H17v2zm0-3h-2.5v-2H17v2z" />
                 </svg>
-                Pricing Calculator with Branches & Contact Info
+                FORMULARIO DE CONTÁCTO
             </div>
         </div>
         <div class="card-content space-y-6">
             <div class="space-y-2">
-                <label class="label" for="clientName">Your Name</label>
-                <input class="input w-full" type="text" id="clientName" placeholder="Your Name">
+                <label class="label" for="clientName">NOMBRE</label>
+                <input class="input w-full" type="text" id="clientName" placeholder="TU NOMBRE Y APPELIDO">
             </div>
             <div class="space-y-2">
-                <label class="label" for="businessType">Type of Business</label>
-                <input class="input w-full" type="text" id="businessType" placeholder="e.g., Retail, SaaS">
+                <label class="label" for="businessType">TIPO DE NEGOCIO</label>
+                <input class="input w-full" type="text" id="businessType" placeholder="Ej., PREVENTA, FARMACIA, SUPERMERCADO">
             </div>
             <div class="space-y-2">
-                <label class="label" for="phoneNumber">Phone Number</label>
-                <input class="input w-full" type="tel" id="phoneNumber" placeholder="Your Phone Number">
+                <label class="label" for="phoneNumber">TELÉFONO</label>
+                <input class="input w-full" type="tel" id="phoneNumber" placeholder="TU TELÉFONO">
             </div>
             <div class="space-y-2">
-                <label class="label" for="branches">Number of branches</label>
+                <label class="label" for="branches">CANTIDAD DE SUCURSALES</label>
                 <input
                     class="input w-full"
                     id="branches"
@@ -219,7 +219,7 @@
                 />
             </div>
             <div class="space-y-2">
-                <label class="label" for="additionalUsers">Additional users</label>
+                <label class="label" for="additionalUsers">USUARIOS ADICIONALES</label>
                 <input
                     class="input w-full"
                     id="additionalUsers"
@@ -231,44 +231,44 @@
             </div>
             <div class="space-y-2">
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Base price per branch</span>
-                    <span class="font-medium">L<span id="basePricePerBranch">990</span>/month</span>
+                    <span class="text-sm text-gray-500">PRECIO BASE POR SUCURSAL</span>
+                    <span class="font-medium">L<span id="basePricePerBranch">990</span>/mes</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Number of branches</span>
+                    <span class="text-sm text-gray-500">CANTIDAD DE SUCURSALES</span>
                     <span class="font-medium"><span id="numberOfBranchesDisplay">1</span></span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Included users</span>
+                    <span class="text-sm text-gray-500">USUARIOS INCLUÍDOS</span>
                     <span class="font-medium"><span id="totalIncludedUsers">3</span></span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-sm text-gray-500">Additional users (L<span id="pricePerAdditionalUser">300</span>/user)</span>
+                    <span class="text-sm text-gray-500">USUARIOS ADICIONALES (L<span id="pricePerAdditionalUser">300</span>/usuario)</span>
                     <span class="font-medium">L<span id="additionalUserCost">0</span></span>
                 </div>
                 <div class="border-t pt-2 mt-2 flex justify-between">
                     <span class="font-medium">Total</span>
-                    <span class="font-bold text-lg">L<span id="totalPrice">990</span>/month</span>
+                    <span class="font-bold text-lg">L<span id="totalPrice">990</span>/mes</span>
                 </div>
             </div>
             <div class="bg-gray-50 p-4 rounded-lg">
-                <h3 class="font-medium mb-2">Price breakdown</h3>
+                <h3 class="font-medium mb-2">RESUMEN</h3>
                 <ul class="ul space-y-1 text-sm">
                     <li class="flex justify-between">
-                        <span>Base price (<span id="breakdownNumberOfBranches">1</span> branch):</span>
+                        <span>PRECIO BASE (<span id="breakdownNumberOfBranches">1</span> SUCURSALES):</span>
                         <span>L<span id="breakdownBasePrice">990</span></span>
                     </li>
                     <li class="flex justify-between">
-                        <span>Additional users (<span id="breakdownAdditionalUsersCount">0</span> × L<span id="breakdownPricePerAdditionalUser">300</span>):</span>
+                        <span>USUARIOS ADICIONALES (<span id="breakdownAdditionalUsersCount">0</span> × L<span id="breakdownPricePerAdditionalUser">300</span>):</span>
                         <span>L<span id="breakdownAdditionalUserCost">0</span></span>
                     </li>
                     <li class="flex justify-between font-medium pt-2 border-t">
                         <span>Total:</span>
-                        <span>L<span id="breakdownTotalPrice">990</span>/month</span>
+                        <span>L<span id="breakdownTotalPrice">990</span>/mes</span>
                     </li>
                 </ul>
             </div>
-            <button class="button mt-4" onclick="sendToWhatsApp()">Send Inquiry via WhatsApp</button>
+            <button class="button mt-4" onclick="sendToWhatsApp()">CONTINUAR EN WHATSAPP</button>
         </div>
     </div>
 
@@ -276,7 +276,8 @@
         const basePricePerBranch = 990;
         const pricePerAdditionalUser = 300;
         const usersPerBranch = 3;
-        const whatsappNumber = '+504XXXXXXXX'; // Replace with your WhatsApp number
+        const whatsappNumber = '+50493593126'; // Replace with your WhatsApp number
+        const mensaje = 'Hola, vengo de tu anuncio y me interesa un sistema para mi negocio, te dejo mis datos:'; // Edit de mesage
 
         function updatePrice() {
             const numberOfBranches = parseInt(document.getElementById('branches').value);
@@ -309,16 +310,17 @@
             const totalPrice = document.getElementById('totalPrice').textContent;
 
             const message = encodeURIComponent(`
-Inquiry Details:
-Name: ${clientName}
-Business Type: ${businessType}
-Phone Number: ${phoneNumber}
-Number of Branches: ${numberOfBranches}
-Additional Users: ${additionalUsers}
-Total Estimated Price: L${totalPrice}/month
+${mensaje}
+Detalles:
+Nombre: ${clientName}
+Tipo de negocio: ${businessType}
+Teléfono: ${phoneNumber}
+Sucursales: ${numberOfBranches}
+Usuarios adicionales: ${additionalUsers}
+Total Estimado: L${totalPrice}/mes
 `);
 
-            const whatsappURL = `https://wa.me/${93593126}?text=${message}`;
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
             window.open(whatsappURL, '_blank');
         }
 
