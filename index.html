@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMPOS - Digitalización de Negocios</title>
+    <link rel="icon" type="image/x-icon" href="https://github.com/rimedhn/rmpos/blob/main/LOGO%20RMPOS.jpg?raw=true">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-purple': '#8B5CF6',
+                        'brand-purple-dark': '#7C3AED',
+                        'brand-purple-light': '#A78BFA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+        }
+        .floating-btn {
+            position: fixed;
+            right: 20px;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        .floating-whatsapp {
+            bottom: 20px;
+        }
+        .floating-top {
+            bottom: 90px;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .carousel-container {
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+        .platform-showcase-container {
+            overflow: hidden;
+        }
+        .platform-showcase-track {
+            display: flex;
+            animation: showcaseScroll 25s linear infinite;
+        }
+        @keyframes showcaseScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .platform-showcase-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+        }
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #8B5CF6;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <img src="https://github.com/rimedhn/rmpos/blob/main/LOGO%20RMPOS.jpg?raw=true" alt="RMPOS Logo" class="w-12 h-12 rounded-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="w-12 h-12 bg-white rounded-full items-center justify-center hidden">
+                        <i class="fas fa-cash-register text-brand-purple text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">RMPOS</h1>
+                        <p class="text-sm opacity-90">Digitalización de Negocios</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#inicio" class="hover:text-brand-purple-light transition">Inicio</a>
+                    <a href="#servicios" class="hover:text-brand-purple-light transition">Servicios</a>
+                    <a href="#planes" class="hover:text-brand-purple-light transition">Planes</a>
+                    <a href="#contacto" class="hover:text-brand-purple-light transition">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-6">¡Digitaliza tu Negocio Hoy!</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Plataformas de facturación y control de inventarios personalizadas para cualquier rubro. Lleva el control total de tu negocio desde cualquier dispositivo.</p>
+            <button onclick="scrollToSection('planes')" class="bg-white text-brand-purple px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105">
+                Ver Planes
+            </button>
+        </div>
+    </section>
+
+    <!-- Carousel Banner -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="carousel-track">
+                    <div class="carousel-slide bg-gradient-to-r from-brand-purple to-brand-purple-light text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🎯 Facturación Fiscal CAI</h3>
+                        <p>Cumple con todos los parámetros del SAR</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-blue-500 to-blue-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">📱 Acceso Multiplataforma</h3>
+                        <p>Computadora, tablet y teléfono</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-green-500 to-green-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🛒 Tienda en Línea</h3>
+                        <p>Con carrito de compras y pedidos por WhatsApp</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-orange-500 to-orange-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🖨️ Impresión Versátil</h3>
+                        <p>Hoja, ticket, normal y Bluetooth</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-purple-500 to-purple-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">👥 Gestión Completa</h3>
+                        <p>Proveedores, clientes y usuarios con roles</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-red-500 to-red-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">💰 Planes Flexibles</h3>
+                        <p>Desde L899/mes con pago anual disponible</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-teal-500 to-teal-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🔧 Integración POS</h3>
+                        <p>Compatible con cualquier equipo de punto de venta</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-indigo-500 to-indigo-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">📊 Reportes Avanzados</h3>
+                        <p>Control total de ventas, compras e inventarios</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-yellow-500 to-yellow-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🏪 Multi-Sucursal</h3>
+                        <p>Gestiona múltiples ubicaciones desde una plataforma</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-pink-500 to-pink-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">☁️ En la Nube</h3>
+                        <p>Accede desde cualquier lugar con internet</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-cyan-500 to-cyan-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🔒 Seguridad Total</h3>
+                        <p>Respaldos automáticos y encriptación de datos</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-emerald-500 to-emerald-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">📈 Crecimiento Escalable</h3>
+                        <p>Crece con tu negocio sin limitaciones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Plataformas Implementadas</h2>
+            <p class="text-center text-gray-600 mb-12">Tenemos experiencia desarrollando soluciones para diversos rubros</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-brand-purple to-brand-purple-light text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('DISTRIBUIDORAS')">
+                    <i class="fas fa-truck text-2xl mb-2"></i>
+                    <h3 class="font-semibold">DISTRIBUIDORAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('FARMACIAS')">
+                    <i class="fas fa-pills text-2xl mb-2"></i>
+                    <h3 class="font-semibold">FARMACIAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('TIENDAS')">
+                    <i class="fas fa-store text-2xl mb-2"></i>
+                    <h3 class="font-semibold">TIENDAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('RESTAURANTES')">
+                    <i class="fas fa-utensils text-2xl mb-2"></i>
+                    <h3 class="font-semibold">RESTAURANTES</h3>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('CASAS COMERCIALES')">
+                    <i class="fas fa-building text-2xl mb-2"></i>
+                    <h3 class="font-semibold">CASAS COMERCIALES</h3>
+                </div>
+                <div class="bg-gradient-to-br from-red-500 to-red-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('BARBERÍAS')">
+                    <i class="fas fa-cut text-2xl mb-2"></i>
+                    <h3 class="font-semibold">BARBERÍAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('PRESTAMISTAS')">
+                    <i class="fas fa-hand-holding-usd text-2xl mb-2"></i>
+                    <h3 class="font-semibold">PRESTAMISTAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('IGLESIAS')">
+                    <i class="fas fa-church text-2xl mb-2"></i>
+                    <h3 class="font-semibold">IGLESIAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-teal-500 to-teal-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('GIMNASIOS')">
+                    <i class="fas fa-dumbbell text-2xl mb-2"></i>
+                    <h3 class="font-semibold">GIMNASIOS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-gray-600 to-gray-700 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('MOTO Y AUTOREPUESTOS')">
+                    <i class="fas fa-motorcycle text-2xl mb-2"></i>
+                    <h3 class="font-semibold">MOTO Y AUTOREPUESTOS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-brown-500 to-brown-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);" onclick="showPlatformDetails('FERRETERÍAS')">
+                    <i class="fas fa-tools text-2xl mb-2"></i>
+                    <h3 class="font-semibold">FERRETERÍAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-pink-500 to-pink-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('PULPERÍAS')">
+                    <i class="fas fa-shopping-basket text-2xl mb-2"></i>
+                    <h3 class="font-semibold">PULPERÍAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('TRANSPORTE DE PERSONAS')">
+                    <i class="fas fa-bus text-2xl mb-2"></i>
+                    <h3 class="font-semibold">TRANSPORTE DE PERSONAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('CARGA Y ENCOMIENDAS')">
+                    <i class="fas fa-shipping-fast text-2xl mb-2"></i>
+                    <h3 class="font-semibold">CARGA Y ENCOMIENDAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-lime-500 to-lime-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('DELIVERY')">
+                    <i class="fas fa-motorcycle text-2xl mb-2"></i>
+                    <h3 class="font-semibold">DELIVERY</h3>
+                </div>
+                <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('PRODUCCIÓN Y VENTAS')">
+                    <i class="fas fa-industry text-2xl mb-2"></i>
+                    <h3 class="font-semibold">PRODUCCIÓN Y VENTAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-rose-500 to-rose-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('BIENES RAÍCES')">
+                    <i class="fas fa-home text-2xl mb-2"></i>
+                    <h3 class="font-semibold">BIENES RAÍCES</h3>
+                </div>
+                <div class="bg-gradient-to-br from-sky-500 to-sky-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('SERVICIOS')">
+                    <i class="fas fa-wrench text-2xl mb-2"></i>
+                    <h3 class="font-semibold">SERVICIOS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-stone-500 to-stone-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('TALLERES')">
+                    <i class="fas fa-hammer text-2xl mb-2"></i>
+                    <h3 class="font-semibold">TALLERES</h3>
+                </div>
+                <div class="bg-gradient-to-br from-green-700 to-green-800 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('CAJAS RURALES')">
+                    <i class="fas fa-piggy-bank text-2xl mb-2"></i>
+                    <h3 class="font-semibold">CAJAS RURALES</h3>
+                </div>
+                <div class="bg-gradient-to-br from-blue-700 to-blue-800 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('COOPERATIVAS')">
+                    <i class="fas fa-handshake text-2xl mb-2"></i>
+                    <h3 class="font-semibold">COOPERATIVAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-red-700 to-red-800 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('CLÍNICAS')">
+                    <i class="fas fa-stethoscope text-2xl mb-2"></i>
+                    <h3 class="font-semibold">CLÍNICAS</h3>
+                </div>
+                <div class="bg-gradient-to-br from-purple-700 to-purple-800 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('HOTELES')">
+                    <i class="fas fa-bed text-2xl mb-2"></i>
+                    <h3 class="font-semibold">HOTELES</h3>
+                </div>
+                <div class="bg-gradient-to-br from-violet-500 to-violet-600 text-white p-4 rounded-lg text-center shadow-lg cursor-pointer hover:scale-105 transition-transform" onclick="showPlatformDetails('PERSONALIZADA')">
+                    <i class="fas fa-ellipsis-h text-2xl mb-2"></i>
+                    <h3 class="font-semibold">Y MUCHOS MÁS</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Showcase Carousel -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Nuestras Plataformas en Acción</h2>
+            <p class="text-center text-gray-600 mb-12">Descubre cómo nuestras soluciones transforman diferentes tipos de negocios</p>
+            <div class="platform-showcase-container bg-gray-50 rounded-lg shadow-lg overflow-hidden">
+                <div class="platform-showcase-track">
+                    <div class="platform-showcase-slide">
+                        <div class="bg-gradient-to-br from-brand-purple to-brand-purple-light text-white p-8 rounded-lg mx-4 h-80 flex flex-col justify-center items-center text-center">
+                            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-cash-register text-4xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Sistema POS Completo</h3>
+                            <p class="text-lg opacity-90">Punto de venta integrado con facturación fiscal, control de inventarios y reportes en tiempo real</p>
+                        </div>
+                    </div>
+                    <div class="platform-showcase-slide">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-8 rounded-lg mx-4 h-80 flex flex-col justify-center items-center text-center">
+                            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-store text-4xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Tienda en Línea</h3>
+                            <p class="text-lg opacity-90">E-commerce integrado con carrito de compras, catálogo digital y pedidos por WhatsApp</p>
+                        </div>
+                    </div>
+                    <div class="platform-showcase-slide">
+                        <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-8 rounded-lg mx-4 h-80 flex flex-col justify-center items-center text-center">
+                            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-chart-line text-4xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Dashboard Ejecutivo</h3>
+                            <p class="text-lg opacity-90">Panel de control con métricas clave, gráficos interactivos y análisis de rendimiento</p>
+                        </div>
+                    </div>
+                    <div class="platform-showcase-slide">
+                        <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 rounded-lg mx-4 h-80 flex flex-col justify-center items-center text-center">
+                            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-mobile-alt text-4xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">App Móvil</h3>
+                            <p class="text-lg opacity-90">Acceso completo desde dispositivos móviles con sincronización en tiempo real</p>
+                        </div>
+                    </div>
+                    <div class="platform-showcase-slide">
+                        <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-8 rounded-lg mx-4 h-80 flex flex-col justify-center items-center text-center">
+                            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-users text-4xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Gestión Multi-Usuario</h3>
+                            <p class="text-lg opacity-90">Control de roles y permisos para diferentes niveles de acceso en tu organización</p>
+                        </div>
+                    </div>
+                    <div class="platform-showcase-slide">
+                        <div class="bg-gradient-to-br from-red-500 to-red-600 text-white p-8 rounded-lg mx-4 h-80 flex flex-col justify-center items-center text-center">
+                            <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-file-invoice text-4xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Facturación Fiscal</h3>
+                            <p class="text-lg opacity-90">Módulo CAI completo que cumple con todos los requisitos del SAR de Honduras</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Nuestros Servicios</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-users text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Gestión de Proveedores y Clientes</h3>
+                    <p class="text-gray-600">Registra y administra toda tu base de datos de proveedores y clientes de manera eficiente.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-boxes text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Control de Inventarios</h3>
+                    <p class="text-gray-600">Mantén el control total de tus productos y servicios con alertas de stock mínimo.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-file-invoice text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Facturación Fiscal</h3>
+                    <p class="text-gray-600">Módulo CAI completo con todos los parámetros del SAR para cumplir con la normativa.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-shopping-cart text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Ventas y Cotizaciones</h3>
+                    <p class="text-gray-600">Gestiona ventas, preventas y cotizaciones de manera profesional y organizada.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-store text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Tienda en Línea</h3>
+                    <p class="text-gray-600">Tienda integrada con carrito de compras y recepción de pedidos por WhatsApp.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-print text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Impresión Flexible</h3>
+                    <p class="text-gray-600">Imprime en formato hoja y ticket, en impresoras normales y Bluetooth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="planes" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Nuestros Planes</h2>
+            <p class="text-center text-gray-600 mb-8">Elige el plan que mejor se adapte a tu negocio</p>
+            
+            <!-- Toggle Switch -->
+            <div class="flex justify-center items-center mb-12">
+                <span class="mr-3 text-gray-700 font-semibold">Mensual</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="pricingToggle" onchange="togglePricing()">
+                    <span class="slider"></span>
+                </label>
+                <span class="ml-3 text-brand-purple font-semibold">Anual (Ahorra 2 meses)</span>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Plan Básico -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plan Básico</h3>
+                    <div class="text-3xl font-bold text-brand-purple mb-2">
+                        <span id="basicPrice">L899</span><span class="text-lg text-gray-600" id="basicPeriod">/mes</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Implementación: L2,990</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 2 usuarios incluidos</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Control de inventarios</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Gestión de ventas</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin facturación fiscal</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin preventas/cotizaciones</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin tienda en línea</li>
+                    </ul>
+                    <button onclick="selectPlan('Básico')" class="w-full bg-gray-600 text-white py-3 rounded-lg hover:bg-gray-700 transition">
+                        Seleccionar Plan
+                    </button>
+                </div>
+
+                <!-- Plan Premium -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-brand-purple relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-purple text-white px-4 py-1 rounded-full text-sm">
+                        Más Popular
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plan Premium</h3>
+                    <div class="text-3xl font-bold text-brand-purple mb-2">
+                        <span id="premiumPrice">L990</span><span class="text-lg text-gray-600" id="premiumPeriod">/mes</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Implementación: L5,990</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 3 usuarios incluidos</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Facturación fiscal CAI</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Preventas y cotizaciones</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tienda en línea</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Plataforma desarrollada</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
+                    </ul>
+                    <button onclick="selectPlan('Premium')" class="w-full bg-brand-purple text-white py-3 rounded-lg hover:bg-brand-purple-dark transition">
+                        Seleccionar Plan
+                    </button>
+                </div>
+
+                <!-- Plan Personalizado -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plan Personalizado</h3>
+                    <div class="text-3xl font-bold text-brand-purple mb-2">
+                        <span id="customPrice">L1,499</span><span class="text-lg text-gray-600" id="customPeriod">/mes</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Desarrollo: L5,990</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 3 usuarios incluidos</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Desarrollo personalizado</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Funcionalidades específicas</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tienda en línea</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Facturación fiscal CAI</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
+                    </ul>
+                    <button onclick="selectPlan('Personalizado')" class="w-full bg-brand-purple text-white py-3 rounded-lg hover:bg-brand-purple-dark transition">
+                        Seleccionar Plan
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-2 text-brand-purple">💰 Pago Anual Disponible</h3>
+                <p class="text-gray-600">Ahorra pagando solo 10 mensualidades en cualquier plan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Calculadora de Precios</h2>
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                <div class="grid md:grid-cols-3 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Selecciona tu Plan</label>
+                        <select id="planSelect" onchange="calculatePrice()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                            <option value="basico">Plan Básico - L899/mes</option>
+                            <option value="premium">Plan Premium - L990/mes</option>
+                            <option value="personalizado">Plan Personalizado - L1,499/mes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Número de Sucursales</label>
+                        <input type="number" id="branches" min="1" max="50" value="1" onchange="calculatePrice()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">Cada sucursal incluye 3 usuarios</p>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Usuarios Adicionales</label>
+                        <input type="number" id="additionalUsers" min="0" max="50" value="0" onchange="calculatePrice()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">Después de los 3 por sucursal</p>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="annualPayment" onchange="calculatePrice()" class="mr-2 text-brand-purple">
+                        <span class="text-gray-700">Pago anual (ahorra 2 mensualidades)</span>
+                    </label>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-brand-purple mb-4">Resumen de Costos</h3>
+                        <div id="priceBreakdown" class="space-y-2 text-gray-700">
+                            <!-- Price breakdown will be inserted here -->
+                        </div>
+                        <div class="border-t pt-4 mt-4">
+                            <div class="text-3xl font-bold text-brand-purple" id="totalPrice">L899/mes</div>
+                            <div class="text-lg text-gray-600" id="implementationCost">+ L2,990 implementación</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contacto" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Contáctanos</h2>
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                <form id="contactForm" onsubmit="sendWhatsApp(event)">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Nombre del Negocio/Proyecto *</label>
+                            <input type="text" id="businessName" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Actividad del Negocio *</label>
+                            <input type="text" id="businessActivity" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Ubicación *</label>
+                            <input type="text" id="location" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Teléfono *</label>
+                            <input type="tel" id="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Nombre del Representante *</label>
+                        <input type="text" id="representative" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Tipo de Plataforma *</label>
+                            <select id="platformType" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                                <option value="">Selecciona el tipo de plataforma</option>
+                                <option value="DISTRIBUIDORAS">Distribuidoras</option>
+                                <option value="FARMACIAS">Farmacias</option>
+                                <option value="TIENDAS">Tiendas</option>
+                                <option value="RESTAURANTES">Restaurantes</option>
+                                <option value="CASAS COMERCIALES">Casas Comerciales</option>
+                                <option value="BARBERÍAS">Barberías</option>
+                                <option value="PRESTAMISTAS">Prestamistas</option>
+                                <option value="IGLESIAS">Iglesias</option>
+                                <option value="GIMNASIOS">Gimnasios</option>
+                                <option value="MOTO Y AUTOREPUESTOS">Moto y Autorepuestos</option>
+                                <option value="FERRETERÍAS">Ferreterías</option>
+                                <option value="PULPERÍAS">Pulperías</option>
+                                <option value="TRANSPORTE DE PERSONAS">Transporte de Personas</option>
+                                <option value="CARGA Y ENCOMIENDAS">Carga y Encomiendas</option>
+                                <option value="DELIVERY">Delivery</option>
+                                <option value="PRODUCCIÓN Y VENTAS">Producción y Ventas</option>
+                                <option value="BIENES RAÍCES">Bienes Raíces</option>
+                                <option value="SERVICIOS">Servicios</option>
+                                <option value="TALLERES">Talleres</option>
+                                <option value="CAJAS RURALES">Cajas Rurales</option>
+                                <option value="COOPERATIVAS">Cooperativas</option>
+                                <option value="CLÍNICAS">Clínicas</option>
+                                <option value="HOTELES">Hoteles</option>
+                                <option value="PERSONALIZADA">Plataforma Personalizada</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Plan Seleccionado *</label>
+                            <select id="selectedPlan" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                                <option value="">Selecciona un plan</option>
+                                <option value="Plan Básico">Plan Básico - L899/mes</option>
+                                <option value="Plan Premium">Plan Premium - L990/mes</option>
+                                <option value="Plan Personalizado">Plan Personalizado - L1,499/mes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Modalidad de Pago *</label>
+                            <select id="paymentMode" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                                <option value="">Selecciona modalidad de pago</option>
+                                <option value="Mensual">Pago Mensual</option>
+                                <option value="Anual">Pago Anual (Ahorra 2 meses)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Número de Sucursales *</label>
+                            <input type="number" id="branchesForm" min="1" max="50" value="1" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Usuarios Adicionales</label>
+                            <input type="number" id="additionalUsersForm" min="0" max="50" value="0" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Descripción de Funcionalidades Necesarias</label>
+                        <textarea id="requirements" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent" placeholder="Describe las funcionalidades específicas que necesitas..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-purple text-white py-4 rounded-lg font-semibold text-lg hover:bg-brand-purple-dark transition transform hover:scale-105">
+                        <i class="fab fa-whatsapp mr-2"></i> Enviar por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://github.com/rimedhn/rmpos/blob/main/LOGO%20RMPOS.jpg?raw=true" alt="RMPOS Logo" class="w-10 h-10 rounded-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="w-10 h-10 bg-white rounded-full items-center justify-center hidden">
+                            <i class="fas fa-cash-register text-brand-purple"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">RMPOS</h3>
+                    </div>
+                    <p class="text-brand-purple-light">Especialistas en digitalización de negocios con plataformas personalizadas de facturación y control de inventarios.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-brand-purple-light">
+                        <li>Facturación Fiscal CAI</li>
+                        <li>Control de Inventarios</li>
+                        <li>Tienda en Línea</li>
+                        <li>Gestión de Clientes</li>
+                        <li>Plataformas Personalizadas</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contacto</h4>
+                    <div class="space-y-2 text-brand-purple-light">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>rmpos.hn@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone mr-2"></i>
+                            <span>+504 9359-3126</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Honduras</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white border-opacity-20 mt-8 pt-8 text-center text-brand-purple-light">
+                <p>&copy; 2024 RMPOS - Digitalización de Negocios. Todos los derechos reservados.</p>
+                <p class="text-sm mt-2">Desarrollamos plataformas personalizadas para cualquier rubro de negocio</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <button id="scrollToTopBtn" onclick="scrollToTop()" class="floating-btn floating-top bg-brand-purple text-white p-3 rounded-full shadow-lg hover:bg-brand-purple-dark transition" style="display: none;">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+    
+    <a href="https://wa.me/50493593126?text=¡Hola%20RMPOS!%20Estoy%20interesado%20en%20digitalizar%20mi%20negocio.%20Me%20gustaría%20recibir%20más%20información%20sobre%20sus%20plataformas%20de%20facturación%20y%20control%20de%20inventarios.%20¿Podrían%20ayudarme?" target="_blank" class="floating-btn floating-whatsapp bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Platform Details Modal -->
+    <div id="platformModal" class="modal">
+        <div class="bg-white rounded-lg p-8 max-w-2xl mx-4 max-h-96 overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="modalTitle" class="text-2xl font-bold text-brand-purple"></h3>
+                <button onclick="closePlatformModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modalContent" class="mb-6">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="flex gap-4">
+                <button onclick="selectPlatformAndGoToContact()" class="flex-1 bg-brand-purple text-white py-3 px-6 rounded-lg hover:bg-brand-purple-dark transition">
+                    Seleccionar Esta Plataforma
+                </button>
+                <button onclick="closePlatformModal()" class="flex-1 bg-gray-500 text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPlanGlobal = '';
+        let selectedPlatformGlobal = '';
+
+        const platformDetails = {
+            'DISTRIBUIDORAS': {
+                features: ['Control de inventarios por lotes', 'Gestión de múltiples bodegas', 'Facturación fiscal CAI', 'Reportes de ventas por zona', 'Control de créditos y cobranza', 'Gestión de rutas de entrega']
+            },
+            'FARMACIAS': {
+                features: ['Control de medicamentos por lote y vencimiento', 'Alertas de stock mínimo', 'Facturación fiscal CAI', 'Control de recetas médicas', 'Reportes de ventas por categoría', 'Gestión de proveedores farmacéuticos']
+            },
+            'TIENDAS': {
+                features: ['Punto de venta completo', 'Control de inventarios', 'Facturación fiscal CAI', 'Tienda en línea integrada', 'Gestión de promociones', 'Reportes de ventas diarios']
+            },
+            'RESTAURANTES': {
+                features: ['Gestión de mesas y pedidos', 'Control de inventarios de ingredientes', 'Facturación fiscal CAI', 'Menú digital', 'Control de costos por plato', 'Reportes de ventas por período']
+            },
+            'CASAS COMERCIALES': {
+                features: ['Gestión de múltiples líneas de productos', 'Control de inventarios avanzado', 'Facturación fiscal CAI', 'Gestión de representantes', 'Reportes de comisiones', 'Control de créditos']
+            },
+            'BARBERÍAS': {
+                features: ['Agenda de citas', 'Control de servicios', 'Facturación fiscal CAI', 'Gestión de barberos', 'Control de productos', 'Reportes de servicios más solicitados']
+            },
+            'PRESTAMISTAS': {
+                features: ['Control de préstamos', 'Cálculo de intereses', 'Facturación fiscal CAI', 'Gestión de pagos', 'Reportes de cartera', 'Alertas de vencimientos']
+            },
+            'IGLESIAS': {
+                features: ['Control de diezmos y ofrendas', 'Gestión de miembros', 'Facturación fiscal CAI', 'Control de eventos', 'Reportes financieros', 'Gestión de ministerios']
+            },
+            'GIMNASIOS': {
+                features: ['Control de membresías', 'Gestión de rutinas', 'Facturación fiscal CAI', 'Control de acceso', 'Reportes de asistencia', 'Gestión de entrenadores']
+            },
+            'MOTO Y AUTOREPUESTOS': {
+                features: ['Control de repuestos por marca y modelo', 'Gestión de compatibilidades', 'Facturación fiscal CAI', 'Control de garantías', 'Reportes de rotación', 'Gestión de proveedores especializados']
+            },
+            'FERRETERÍAS': {
+                features: ['Control de inventarios por categoría', 'Gestión de herramientas', 'Facturación fiscal CAI', 'Control de materiales de construcción', 'Reportes de ventas por proyecto', 'Gestión de créditos a constructores']
+            },
+            'PULPERÍAS': {
+                features: ['Punto de venta rápido', 'Control de productos básicos', 'Facturación fiscal CAI', 'Gestión de créditos vecinales', 'Reportes de productos más vendidos', 'Control de vencimientos']
+            },
+            'TRANSPORTE DE PERSONAS': {
+                features: ['Control de rutas', 'Gestión de vehículos', 'Facturación fiscal CAI', 'Control de conductores', 'Reportes de ingresos por ruta', 'Gestión de mantenimientos']
+            },
+            'CARGA Y ENCOMIENDAS': {
+                features: ['Control de envíos', 'Gestión de destinatarios', 'Facturación fiscal CAI', 'Tracking de paquetes', 'Reportes de entregas', 'Control de tarifas por destino']
+            },
+            'DELIVERY': {
+                features: ['Gestión de pedidos', 'Control de repartidores', 'Facturación fiscal CAI', 'Tracking en tiempo real', 'Reportes de entregas', 'Gestión de zonas de reparto']
+            },
+            'PRODUCCIÓN Y VENTAS': {
+                features: ['Control de materias primas', 'Gestión de procesos productivos', 'Facturación fiscal CAI', 'Control de costos de producción', 'Reportes de eficiencia', 'Gestión de órdenes de trabajo']
+            },
+            'BIENES RAÍCES': {
+                features: ['Gestión de propiedades', 'Control de contratos', 'Facturación fiscal CAI', 'Gestión de clientes', 'Reportes de comisiones', 'Control de documentos legales']
+            },
+            'SERVICIOS': {
+                features: ['Gestión de servicios profesionales', 'Control de citas', 'Facturación fiscal CAI', 'Gestión de clientes', 'Reportes de servicios', 'Control de tarifas']
+            },
+            'TALLERES': {
+                features: ['Control de trabajos', 'Gestión de repuestos', 'Facturación fiscal CAI', 'Control de mecánicos', 'Reportes de reparaciones', 'Gestión de garantías']
+            },
+            'CAJAS RURALES': {
+                features: ['Control de ahorros y préstamos', 'Gestión de socios', 'Facturación fiscal CAI', 'Cálculo de intereses', 'Reportes financieros', 'Control de garantías']
+            },
+            'COOPERATIVAS': {
+                features: ['Gestión de asociados', 'Control de aportes', 'Facturación fiscal CAI', 'Distribución de excedentes', 'Reportes de gestión', 'Control de servicios cooperativos']
+            },
+            'CLÍNICAS': {
+                features: ['Gestión de pacientes', 'Control de citas médicas', 'Facturación fiscal CAI', 'Historial clínico', 'Reportes médicos', 'Gestión de personal médico']
+            },
+            'HOTELES': {
+                features: ['Sistema de reservas', 'Control de habitaciones', 'Facturación fiscal CAI', 'Gestión de huéspedes', 'Reportes de ocupación', 'Control de servicios adicionales']
+            },
+            'PERSONALIZADA': {
+                features: ['Funcionalidades específicas para tu negocio', 'Desarrollo a medida', 'Facturación fiscal CAI', 'Integración con sistemas existentes', 'Reportes personalizados', 'Soporte especializado']
+            }
+        };
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectPlan(planName) {
+            selectedPlanGlobal = planName;
+            document.getElementById('selectedPlan').value = `Plan ${planName}`;
+            scrollToSection('contacto');
+        }
+
+        function showPlatformDetails(platformName) {
+            selectedPlatformGlobal = platformName;
+            const modal = document.getElementById('platformModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            title.textContent = platformName;
+            
+            const details = platformDetails[platformName];
+            if (details) {
+                content.innerHTML = `
+                    <h4 class="text-lg font-semibold mb-4 text-gray-800">Características principales:</h4>
+                    <ul class="space-y-2">
+                        ${details.features.map(feature => `
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                <span class="text-gray-700">${feature}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+            }
+            
+            modal.classList.add('show');
+        }
+
+        function closePlatformModal() {
+            document.getElementById('platformModal').classList.remove('show');
+        }
+
+        function selectPlatformAndGoToContact() {
+            document.getElementById('platformType').value = selectedPlatformGlobal;
+            closePlatformModal();
+            scrollToSection('contacto');
+        }
+
+        function togglePricing() {
+            const isAnnual = document.getElementById('pricingToggle').checked;
+            
+            if (isAnnual) {
+                document.getElementById('basicPrice').textContent = 'L8,990';
+                document.getElementById('basicPeriod').textContent = '/año';
+                document.getElementById('premiumPrice').textContent = 'L9,900';
+                document.getElementById('premiumPeriod').textContent = '/año';
+                document.getElementById('customPrice').textContent = 'L14,990';
+                document.getElementById('customPeriod').textContent = '/año';
+            } else {
+                document.getElementById('basicPrice').textContent = 'L899';
+                document.getElementById('basicPeriod').textContent = '/mes';
+                document.getElementById('premiumPrice').textContent = 'L990';
+                document.getElementById('premiumPeriod').textContent = '/mes';
+                document.getElementById('customPrice').textContent = 'L1,499';
+                document.getElementById('customPeriod').textContent = '/mes';
+            }
+        }
+
+        function calculatePrice() {
+            const planSelect = document.getElementById('planSelect').value;
+            const branches = parseInt(document.getElementById('branches').value) || 1;
+            const additionalUsers = parseInt(document.getElementById('additionalUsers').value) || 0;
+            const isAnnual = document.getElementById('annualPayment').checked;
+
+            let basePrices = {
+                'basico': { monthly: 899, implementation: 2990, includedUsers: 3 },
+                'premium': { monthly: 990, implementation: 5990, includedUsers: 3 },
+                'personalizado': { monthly: 1499, implementation: 5990, includedUsers: 3 }
+            };
+
+            const selectedPlan = basePrices[planSelect];
+            const planCostPerBranch = selectedPlan.monthly * branches;
+            const additionalUserCost = additionalUsers * 300;
+            const monthlyTotal = planCostPerBranch + additionalUserCost;
+            const annualTotal = isAnnual ? monthlyTotal * 10 : monthlyTotal * 12;
+            const totalIncludedUsers = branches * 3;
+
+            let breakdown = `
+                <div class="text-left">
+                    <div class="flex justify-between"><span>Plan base (${branches} sucursal${branches > 1 ? 'es' : ''}):</span><span>L${planCostPerBranch}</span></div>
+                    <div class="flex justify-between text-sm text-gray-600"><span>Incluye ${totalIncludedUsers} usuarios (3 por sucursal)</span><span></span></div>
+                    ${additionalUsers > 0 ? `<div class="flex justify-between"><span>${additionalUsers} usuarios adicionales:</span><span>L${additionalUserCost}</span></div>` : ''}
+                    <div class="flex justify-between font-semibold"><span>Subtotal mensual:</span><span>L${monthlyTotal}</span></div>
+                    ${isAnnual ? `<div class="flex justify-between text-green-600"><span>Descuento anual:</span><span>-L${monthlyTotal * 2}</span></div>` : ''}
+                </div>
+            `;
+
+            document.getElementById('priceBreakdown').innerHTML = breakdown;
+            document.getElementById('totalPrice').textContent = isAnnual ? `L${annualTotal}/año` : `L${monthlyTotal}/mes`;
+            document.getElementById('implementationCost').textContent = `+ L${selectedPlan.implementation * branches} implementación`;
+        }
+
+        function sendWhatsApp(event) {
+            event.preventDefault();
+            
+            const businessName = document.getElementById('businessName').value;
+            const businessActivity = document.getElementById('businessActivity').value;
+            const location = document.getElementById('location').value;
+            const phone = document.getElementById('phone').value;
+            const representative = document.getElementById('representative').value;
+            const platformType = document.getElementById('platformType').value;
+            const selectedPlan = document.getElementById('selectedPlan').value;
+            const paymentMode = document.getElementById('paymentMode').value;
+            const branches = document.getElementById('branchesForm').value;
+            const additionalUsers = document.getElementById('additionalUsersForm').value;
+            const requirements = document.getElementById('requirements').value;
+
+            const message = `🏢 *SOLICITUD DE INFORMACIÓN RMPOS*
+
+📋 *Datos del Negocio:*
+• Nombre: ${businessName}
+• Actividad: ${businessActivity}
+• Ubicación: ${location}
+
+👤 *Datos de Contacto:*
+• Representante: ${representative}
+• Teléfono: ${phone}
+
+🏭 *Tipo de Plataforma:*
+${platformType}
+
+💼 *Plan Seleccionado:*
+${selectedPlan}
+
+🏪 *Configuración:*
+• Número de sucursales: ${branches}
+• Usuarios adicionales: ${additionalUsers || '0'}
+
+💰 *Modalidad de Pago:*
+${paymentMode}
+
+📝 *Funcionalidades Requeridas:*
+${requirements || 'No especificadas'}
+
+¡Gracias por tu interés en RMPOS! 🚀`;
+
+            const whatsappUrl = `https://wa.me/50493593126?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Initialize price calculator
+        calculatePrice();
+
+        // Duplicate carousel content for seamless loop
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.carousel-track');
+            const slides = track.innerHTML;
+            track.innerHTML = slides + slides;
+            
+            // Duplicate platform showcase carousel
+            const showcaseTrack = document.querySelector('.platform-showcase-track');
+            const showcaseSlides = showcaseTrack.innerHTML;
+            showcaseTrack.innerHTML = showcaseSlides + showcaseSlides;
+        });
+
+        // Show/hide scroll to top button based on header visibility
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollBtn = document.getElementById('scrollToTopBtn');
+            const headerRect = header.getBoundingClientRect();
+            
+            if (headerRect.bottom < 0) {
+                scrollBtn.style.display = 'block';
+            } else {
+                scrollBtn.style.display = 'none';
+            }
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('platformModal');
+            if (event.target === modal) {
+                closePlatformModal();
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ee514cc3335cba',t:'MTc1NzgzNjQ3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
