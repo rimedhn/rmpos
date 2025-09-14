@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMPOS - Digitalización de Negocios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-purple': '#8B5CF6',
+                        'brand-purple-dark': '#7C3AED',
+                        'brand-purple-light': '#A78BFA'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+        }
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .carousel-container {
+            overflow: hidden;
+        }
+        .carousel-track {
+            display: flex;
+            animation: scroll 15s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .carousel-slide {
+            min-width: 100%;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                        <i class="fas fa-cash-register text-brand-purple text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">RMPOS</h1>
+                        <p class="text-sm opacity-90">Digitalización de Negocios</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#inicio" class="hover:text-brand-purple-light transition">Inicio</a>
+                    <a href="#servicios" class="hover:text-brand-purple-light transition">Servicios</a>
+                    <a href="#planes" class="hover:text-brand-purple-light transition">Planes</a>
+                    <a href="#contacto" class="hover:text-brand-purple-light transition">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-6">¡Digitaliza tu Negocio Hoy!</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Plataformas de facturación y control de inventarios personalizadas para cualquier rubro. Lleva el control total de tu negocio desde cualquier dispositivo.</p>
+            <button onclick="scrollToSection('planes')" class="bg-white text-brand-purple px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition transform hover:scale-105">
+                Ver Planes
+            </button>
+        </div>
+    </section>
+
+    <!-- Carousel Banner -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="carousel-track">
+                    <div class="carousel-slide bg-gradient-to-r from-brand-purple to-brand-purple-light text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🎯 Facturación Fiscal CAI</h3>
+                        <p>Cumple con todos los parámetros del SAR</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-blue-500 to-blue-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">📱 Acceso Multiplataforma</h3>
+                        <p>Computadora, tablet y teléfono</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-green-500 to-green-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🛒 Tienda en Línea</h3>
+                        <p>Con carrito de compras y pedidos por WhatsApp</p>
+                    </div>
+                    <div class="carousel-slide bg-gradient-to-r from-orange-500 to-orange-600 text-white p-8 text-center">
+                        <h3 class="text-2xl font-bold mb-2">🖨️ Impresión Versátil</h3>
+                        <p>Hoja, ticket, normal y Bluetooth</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Nuestros Servicios</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-users text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Gestión de Proveedores y Clientes</h3>
+                    <p class="text-gray-600">Registra y administra toda tu base de datos de proveedores y clientes de manera eficiente.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-boxes text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Control de Inventarios</h3>
+                    <p class="text-gray-600">Mantén el control total de tus productos y servicios con alertas de stock mínimo.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-file-invoice text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Facturación Fiscal</h3>
+                    <p class="text-gray-600">Módulo CAI completo con todos los parámetros del SAR para cumplir con la normativa.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-shopping-cart text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Ventas y Cotizaciones</h3>
+                    <p class="text-gray-600">Gestiona ventas, preventas y cotizaciones de manera profesional y organizada.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-store text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Tienda en Línea</h3>
+                    <p class="text-gray-600">Tienda integrada con carrito de compras y recepción de pedidos por WhatsApp.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-brand-purple">
+                    <i class="fas fa-print text-brand-purple text-3xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-3">Impresión Flexible</h3>
+                    <p class="text-gray-600">Imprime en formato hoja y ticket, en impresoras normales y Bluetooth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="planes" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-800">Nuestros Planes</h2>
+            <p class="text-center text-gray-600 mb-12">Elige el plan que mejor se adapte a tu negocio</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Plan Básico -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plan Básico</h3>
+                    <div class="text-3xl font-bold text-brand-purple mb-2">L899<span class="text-lg text-gray-600">/mes</span></div>
+                    <p class="text-gray-600 mb-6">Implementación: L2,990</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 2 usuarios incluidos</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Control de inventarios</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Gestión de ventas</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin facturación fiscal</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin preventas/cotizaciones</li>
+                        <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin tienda en línea</li>
+                    </ul>
+                    <button onclick="selectPlan('Básico')" class="w-full bg-gray-600 text-white py-3 rounded-lg hover:bg-gray-700 transition">
+                        Seleccionar Plan
+                    </button>
+                </div>
+
+                <!-- Plan Premium -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-brand-purple relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-purple text-white px-4 py-1 rounded-full text-sm">
+                        Más Popular
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plan Premium</h3>
+                    <div class="text-3xl font-bold text-brand-purple mb-2">L990<span class="text-lg text-gray-600">/mes</span></div>
+                    <p class="text-gray-600 mb-6">Implementación: L5,990</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 3 usuarios incluidos</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Facturación fiscal CAI</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Preventas y cotizaciones</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tienda en línea</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Plataforma desarrollada</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
+                    </ul>
+                    <button onclick="selectPlan('Premium')" class="w-full bg-brand-purple text-white py-3 rounded-lg hover:bg-brand-purple-dark transition">
+                        Seleccionar Plan
+                    </button>
+                </div>
+
+                <!-- Plan Personalizado -->
+                <div class="bg-white rounded-lg shadow-lg p-8 border-2 border-gray-200">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Plan Personalizado</h3>
+                    <div class="text-3xl font-bold text-brand-purple mb-2">L1,499<span class="text-lg text-gray-600">/mes</span></div>
+                    <p class="text-gray-600 mb-6">Desarrollo: L5,990</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 3 usuarios incluidos</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Desarrollo personalizado</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Funcionalidades específicas</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tienda en línea</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Facturación fiscal CAI</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
+                    </ul>
+                    <button onclick="selectPlan('Personalizado')" class="w-full bg-brand-purple text-white py-3 rounded-lg hover:bg-brand-purple-dark transition">
+                        Seleccionar Plan
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold mb-2 text-brand-purple">💰 Pago Anual Disponible</h3>
+                <p class="text-gray-600">Ahorra pagando solo 10 mensualidades en cualquier plan</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Calculadora de Precios</h2>
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Selecciona tu Plan</label>
+                        <select id="planSelect" onchange="calculatePrice()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                            <option value="basico">Plan Básico - L899/mes</option>
+                            <option value="premium">Plan Premium - L990/mes</option>
+                            <option value="personalizado">Plan Personalizado - L1,499/mes</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Usuarios Adicionales</label>
+                        <input type="number" id="additionalUsers" min="0" max="50" value="0" onchange="calculatePrice()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="annualPayment" onchange="calculatePrice()" class="mr-2 text-brand-purple">
+                        <span class="text-gray-700">Pago anual (ahorra 2 mensualidades)</span>
+                    </label>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-brand-purple mb-4">Resumen de Costos</h3>
+                        <div id="priceBreakdown" class="space-y-2 text-gray-700">
+                            <!-- Price breakdown will be inserted here -->
+                        </div>
+                        <div class="border-t pt-4 mt-4">
+                            <div class="text-3xl font-bold text-brand-purple" id="totalPrice">L899/mes</div>
+                            <div class="text-lg text-gray-600" id="implementationCost">+ L2,990 implementación</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contacto" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Contáctanos</h2>
+            <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
+                <form id="contactForm" onsubmit="sendWhatsApp(event)">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Nombre del Negocio/Proyecto *</label>
+                            <input type="text" id="businessName" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Actividad del Negocio *</label>
+                            <input type="text" id="businessActivity" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Ubicación *</label>
+                            <input type="text" id="location" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Teléfono *</label>
+                            <input type="tel" id="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Nombre del Representante *</label>
+                        <input type="text" id="representative" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Plan Seleccionado *</label>
+                        <select id="selectedPlan" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent">
+                            <option value="">Selecciona un plan</option>
+                            <option value="Plan Básico">Plan Básico - L899/mes</option>
+                            <option value="Plan Premium">Plan Premium - L990/mes</option>
+                            <option value="Plan Personalizado">Plan Personalizado - L1,499/mes</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Descripción de Funcionalidades Necesarias</label>
+                        <textarea id="requirements" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-purple focus:border-transparent" placeholder="Describe las funcionalidades específicas que necesitas..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-purple text-white py-4 rounded-lg font-semibold text-lg hover:bg-brand-purple-dark transition transform hover:scale-105">
+                        <i class="fab fa-whatsapp mr-2"></i> Enviar por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <i class="fas fa-cash-register text-brand-purple"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">RMPOS</h3>
+                    </div>
+                    <p class="text-brand-purple-light">Especialistas en digitalización de negocios con plataformas personalizadas de facturación y control de inventarios.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-brand-purple-light">
+                        <li>Facturación Fiscal CAI</li>
+                        <li>Control de Inventarios</li>
+                        <li>Tienda en Línea</li>
+                        <li>Gestión de Clientes</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white border-opacity-20 mt-8 pt-8 text-center text-brand-purple-light">
+                <p>&copy; 2024 RMPOS. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/50493593126" target="_blank" class="floating-btn bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <script>
+        let selectedPlanGlobal = '';
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectPlan(planName) {
+            selectedPlanGlobal = planName;
+            document.getElementById('selectedPlan').value = `Plan ${planName}`;
+            scrollToSection('contacto');
+        }
+
+        function calculatePrice() {
+            const planSelect = document.getElementById('planSelect').value;
+            const additionalUsers = parseInt(document.getElementById('additionalUsers').value) || 0;
+            const isAnnual = document.getElementById('annualPayment').checked;
+
+            let basePrices = {
+                'basico': { monthly: 899, implementation: 2990, includedUsers: 2 },
+                'premium': { monthly: 990, implementation: 5990, includedUsers: 3 },
+                'personalizado': { monthly: 1499, implementation: 5990, includedUsers: 3 }
+            };
+
+            const selectedPlan = basePrices[planSelect];
+            const additionalUserCost = additionalUsers * 300;
+            const monthlyTotal = selectedPlan.monthly + additionalUserCost;
+            const annualTotal = isAnnual ? monthlyTotal * 10 : monthlyTotal * 12;
+
+            let breakdown = `
+                <div class="text-left">
+                    <div class="flex justify-between"><span>Plan base:</span><span>L${selectedPlan.monthly}</span></div>
+                    ${additionalUsers > 0 ? `<div class="flex justify-between"><span>${additionalUsers} usuarios adicionales:</span><span>L${additionalUserCost}</span></div>` : ''}
+                    <div class="flex justify-between font-semibold"><span>Subtotal mensual:</span><span>L${monthlyTotal}</span></div>
+                    ${isAnnual ? `<div class="flex justify-between text-green-600"><span>Descuento anual:</span><span>-L${monthlyTotal * 2}</span></div>` : ''}
+                </div>
+            `;
+
+            document.getElementById('priceBreakdown').innerHTML = breakdown;
+            document.getElementById('totalPrice').textContent = isAnnual ? `L${annualTotal}/año` : `L${monthlyTotal}/mes`;
+            document.getElementById('implementationCost').textContent = `+ L${selectedPlan.implementation} implementación`;
+        }
+
+        function sendWhatsApp(event) {
+            event.preventDefault();
+            
+            const businessName = document.getElementById('businessName').value;
+            const businessActivity = document.getElementById('businessActivity').value;
+            const location = document.getElementById('location').value;
+            const phone = document.getElementById('phone').value;
+            const representative = document.getElementById('representative').value;
+            const selectedPlan = document.getElementById('selectedPlan').value;
+            const requirements = document.getElementById('requirements').value;
+
+            const message = `🏢 *SOLICITUD DE INFORMACIÓN RMPOS*
+
+📋 *Datos del Negocio:*
+• Nombre: ${businessName}
+• Actividad: ${businessActivity}
+• Ubicación: ${location}
+
+👤 *Datos de Contacto:*
+• Representante: ${representative}
+• Teléfono: ${phone}
+
+💼 *Plan Seleccionado:*
+${selectedPlan}
+
+📝 *Funcionalidades Requeridas:*
+${requirements || 'No especificadas'}
+
+¡Gracias por tu interés en RMPOS! 🚀`;
+
+            const whatsappUrl = `https://wa.me/50493593126?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Initialize price calculator
+        calculatePrice();
+
+        // Duplicate carousel content for seamless loop
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.carousel-track');
+            const slides = track.innerHTML;
+            track.innerHTML = slides + slides;
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97edf43090bb1499',t:'MTc1NzgzMjY2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
