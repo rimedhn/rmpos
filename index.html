@@ -532,6 +532,7 @@
                         <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin facturación fiscal</li>
                         <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin preventas/cotizaciones</li>
                         <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin tienda en línea</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
                     </ul>
                     <button onclick="selectPlan('Básico')" class="w-full bg-gray-600 text-white py-3 rounded-lg hover:bg-gray-700 transition">
                         Seleccionar Plan
@@ -567,7 +568,7 @@
                     <div class="text-3xl font-bold text-brand-purple mb-2">
                         <span id="customPrice">L1,499</span><span class="text-lg text-gray-600" id="customPeriod">/mes</span>
                     </div>
-                    <p class="text-gray-600 mb-6">Desarrollo: L5,990</p>
+                    <p class="text-gray-600 mb-6">Desarrollo: L8,990</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 3 usuarios incluidos</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Desarrollo personalizado</li>
@@ -875,43 +876,43 @@
 
         const platformDetails = {
             'DISTRIBUIDORAS': {
-                features: ['Control de inventarios por lotes', 'Gestión de múltiples bodegas', 'Facturación fiscal CAI', 'Reportes de ventas por zona', 'Control de créditos y cobranza', 'Gestión de rutas de entrega']
+                features: ['App de pedidos','Control de inventarios', 'Gestión de almacenes', 'Facturación fiscal CAI', 'Reportes de ventas y preventas', 'Control de créditos y cobranza', 'Gestión de rutas de entrega', 'Mapa de rutas, ventas y entregas']
             },
             'FARMACIAS': {
-                features: ['Control de medicamentos por lote y vencimiento', 'Alertas de stock mínimo', 'Facturación fiscal CAI', 'Control de recetas médicas', 'Reportes de ventas por categoría', 'Gestión de proveedores farmacéuticos']
+                features: ['Control de medicamentos por lote y vencimiento', 'Gestiòn de puntos', 'Facturación fiscal CAI', 'Pedidos sugeridos', 'Reportes de ventas', 'Gestión de proveedores']
             },
             'TIENDAS': {
-                features: ['Punto de venta completo', 'Control de inventarios', 'Facturación fiscal CAI', 'Tienda en línea integrada', 'Gestión de promociones', 'Reportes de ventas diarios']
+                features: ['Punto de venta completo', 'Control de inventarios', 'Facturación fiscal CAI', 'Tienda en línea integrada', 'Gestión de promociones', 'Reportes de ventas']
             },
             'RESTAURANTES': {
-                features: ['Gestión de mesas y pedidos', 'Control de inventarios de ingredientes', 'Facturación fiscal CAI', 'Menú digital', 'Control de costos por plato', 'Reportes de ventas por período']
+                features: ['Gestión de pedidos', 'Control de inventarios', 'Facturación fiscal CAI', 'Menú digital', 'Control de creditos', 'Reportes de ventas']
             },
             'CASAS COMERCIALES': {
-                features: ['Gestión de múltiples líneas de productos', 'Control de inventarios avanzado', 'Facturación fiscal CAI', 'Gestión de representantes', 'Reportes de comisiones', 'Control de créditos']
+                features: ['Gestión de categorìas de productos', 'Control de inventarios', 'Facturación fiscal CAI', 'Gestión de proveedores', 'Gestiòn de comisiones', 'Control de créditos']
             },
             'BARBERÍAS': {
-                features: ['Agenda de citas', 'Control de servicios', 'Facturación fiscal CAI', 'Gestión de barberos', 'Control de productos', 'Reportes de servicios más solicitados']
+                features: ['Agenda de citas', 'Control de servicios', 'Facturación fiscal CAI', 'Gestión de barberos', 'Control de productos', 'Reportes de servicios y comisiones']
             },
             'PRESTAMISTAS': {
                 features: ['Control de préstamos', 'Cálculo de intereses', 'Facturación fiscal CAI', 'Gestión de pagos', 'Reportes de cartera', 'Alertas de vencimientos']
             },
             'IGLESIAS': {
-                features: ['Control de diezmos y ofrendas', 'Gestión de miembros', 'Facturación fiscal CAI', 'Control de eventos', 'Reportes financieros', 'Gestión de ministerios']
+                features: ['Control de diezmos y ofrendas', 'Gestión de miembros', 'Anuncios', 'Control de eventos', 'Reportes financieros', 'Gestión de ministerios']
             },
             'GIMNASIOS': {
-                features: ['Control de membresías', 'Gestión de rutinas', 'Facturación fiscal CAI', 'Control de acceso', 'Reportes de asistencia', 'Gestión de entrenadores']
+                features: ['Control de membresías', 'Control de pagos', 'Facturación fiscal CAI', 'Reporte de pagos', 'Reportes de miembros', 'Control de productos y servicios']
             },
             'MOTO Y AUTOREPUESTOS': {
-                features: ['Control de repuestos por marca y modelo', 'Gestión de compatibilidades', 'Facturación fiscal CAI', 'Control de garantías', 'Reportes de rotación', 'Gestión de proveedores especializados']
+                features: ['Control de repuestos por marca y modelo', 'Gestión de clientes y proveedores', 'Facturación fiscal CAI', 'Control de crèditos', 'Reportes de ventas', 'Gestión de cobros']
             },
             'FERRETERÍAS': {
-                features: ['Control de inventarios por categoría', 'Gestión de herramientas', 'Facturación fiscal CAI', 'Control de materiales de construcción', 'Reportes de ventas por proyecto', 'Gestión de créditos a constructores']
+                features: ['Control de inventarios', 'Gestión de descuentos', 'Facturación fiscal CAI', 'Gestiòn de crèditos', 'Reportes de ventas', 'Top mas vendidos']
             },
             'PULPERÍAS': {
-                features: ['Punto de venta rápido', 'Control de productos básicos', 'Facturación fiscal CAI', 'Gestión de créditos vecinales', 'Reportes de productos más vendidos', 'Control de vencimientos']
+                features: ['Gestiòn de ventas', 'Control de productos', 'Facturación fiscal CAI', 'Gestión de créditos', 'Top productos más vendidos', 'Control de vencimientos']
             },
             'TRANSPORTE DE PERSONAS': {
-                features: ['Control de rutas', 'Gestión de vehículos', 'Facturación fiscal CAI', 'Control de conductores', 'Reportes de ingresos por ruta', 'Gestión de mantenimientos']
+                features: ['Control de rutas', 'Gestión de vehículos', 'Facturación fiscal CAI', 'Control de conductores', 'Reportes de ingresos por ruta', 'Comisiones']
             },
             'CARGA Y ENCOMIENDAS': {
                 features: ['Control de envíos', 'Gestión de destinatarios', 'Facturación fiscal CAI', 'Tracking de paquetes', 'Reportes de entregas', 'Control de tarifas por destino']
