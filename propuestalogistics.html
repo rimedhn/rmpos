@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RM POS Logistics - Plataforma de Gestión Logística</title>
+    <link rel="icon" type="image/jpeg" href="https://github.com/rimedhn/rmpos/blob/main/LOGO%20RMPOS.jpg?raw=true">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            animation: pulse 2s infinite;
+        }
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="https://github.com/rimedhn/rmpos/blob/main/LOGO%20RMPOS.jpg?raw=true" alt="RM POS Logistics" class="h-10 w-auto mr-3" onerror="this.style.display='none'">
+                    <span class="text-xl font-bold text-gray-800">RM POS Logistics</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-700 hover:text-blue-600 transition duration-300">Inicio</a>
+                    <a href="#ventajas" class="text-gray-700 hover:text-blue-600 transition duration-300">Ventajas</a>
+                    <a href="#modulos" class="text-gray-700 hover:text-blue-600 transition duration-300">Módulos</a>
+                    <a href="#precios" class="text-gray-700 hover:text-blue-600 transition duration-300">Precios</a>
+                    <a href="#contacto" class="text-gray-700 hover:text-blue-600 transition duration-300">Contacto</a>
+                </div>
+                <button id="menu-btn" class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <a href="#inicio" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Inicio</a>
+            <a href="#ventajas" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Ventajas</a>
+            <a href="#modulos" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Módulos</a>
+            <a href="#precios" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Precios</a>
+            <a href="#contacto" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="gradient-bg text-white pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">RM POS Logistics</h1>
+                    <p class="text-xl md:text-2xl mb-8">Plataforma integral de gestión de información personalizada para empresas de logística con portal web de consulta incluido</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button onclick="generateProposal()" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                            📄 Generar Propuesta PDF
+                        </button>
+                        <a href="#contacto" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+                            Solicitar Reunión
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Equipo profesional de logística trabajando con tecnología" class="rounded-lg shadow-2xl w-full max-w-md" onerror="this.style.display='none'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ventajas Section -->
+    <section id="ventajas" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">¿Por qué elegir RM POS Logistics?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Profesional gestionando operaciones logísticas" class="w-full h-32 object-cover rounded-lg" onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Gestión Integral</h3>
+                    <p class="text-gray-600">Control completo de cargas, manifiestos, comprobantes y seguimiento en tiempo real de todas sus operaciones logísticas.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Profesional analizando finanzas y reportes" class="w-full h-32 object-cover rounded-lg" onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Control Financiero</h3>
+                    <p class="text-gray-600">Manejo completo de caja, facturas, cobros, pagos y arqueos para un control financiero preciso y transparente.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Equipo trabajando con múltiples dispositivos" class="w-full h-32 object-cover rounded-lg" onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Acceso Multiplataforma</h3>
+                    <p class="text-gray-600">Disponible en computadora, tablet y móvil. Acceda desde cualquier dispositivo, en cualquier momento y lugar.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Profesional usando portal web de consultas" class="w-full h-32 object-cover rounded-lg" onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Portal Web Incluido</h3>
+                    <p class="text-gray-600">Portal web de consulta para que sus clientes puedan hacer seguimiento de sus guías de transporte las 24 horas.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Equipo de recursos humanos trabajando" class="w-full h-32 object-cover rounded-lg" onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Gestión de Personal</h3>
+                    <p class="text-gray-600">Control completo de empleados, planillas, adelantos y préstamos para una administración eficiente del recurso humano.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg card-hover">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Desarrollador personalizando sistema" class="w-full h-32 object-cover rounded-lg" onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Personalizable</h3>
+                    <p class="text-gray-600">Sistema adaptable a las necesidades específicas de su empresa logística con configuraciones personalizadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Módulos Section -->
+    <section id="modulos" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Módulos del Sistema</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Operaciones logísticas" class="w-full h-24 object-cover rounded opacity-30" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+                            <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h16v2H4v-2zm0 4h16v2H4v-2z"/>
+                            <rect x="2" y="2" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                        <h3 class="text-lg font-semibold">Operaciones</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• Gestión de Cargas</li>
+                        <li>• Manifiestos</li>
+                        <li>• Comprobantes</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Finanzas y contabilidad" class="w-full h-24 object-cover rounded opacity-30" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <h3 class="text-lg font-semibold">Finanzas</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• Caja y Arqueos</li>
+                        <li>• Facturas y Prefacturas</li>
+                        <li>• Cuadres</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Gestión de cobros" class="w-full h-24 object-cover rounded opacity-30" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+                            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                        </svg>
+                        <h3 class="text-lg font-semibold">Cobros</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• Gestión de Cobros</li>
+                        <li>• Saldos por Cobrar</li>
+                        <li>• Seguimiento</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-red-500 to-red-600 text-white p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Control de pagos" class="w-full h-24 object-cover rounded opacity-30" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+                            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                        </svg>
+                        <h3 class="text-lg font-semibold">Pagos</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• Control de Pagos</li>
+                        <li>• Saldos por Pagar</li>
+                        <li>• Programación</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Gestión de clientes" class="w-full h-24 object-cover rounded opacity-30" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <h3 class="text-lg font-semibold">Clientes</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• Gestión de Clientes</li>
+                        <li>• Ventas y Servicios</li>
+                        <li>• Historial</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-6 rounded-lg">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Gestión de proveedores" class="w-full h-24 object-cover rounded opacity-30" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+                            <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10z"/>
+                        </svg>
+                        <h3 class="text-lg font-semibold">Proveedores</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• Gestión de Proveedores</li>
+                        <li>• Compras y Productos</li>
+                        <li>• Control de Gastos</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-teal-500 to-teal-600 text-white p-6 rounded-lg md:col-span-2 lg:col-span-1">
+                    <div class="mb-4">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Recursos humanos" class="w-full h-24 object-cover rounded opacity-30" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex items-center mb-3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.5 7h-5c-.8 0-1.5.7-1.5 1.5v6c0 .8.7 1.5 1.5 1.5h2v6h4zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm2 16v-7H9v-2c0-.8-.7-1.5-1.5-1.5h-3C3.7 11.5 3 12.2 3 13v2h1.5v7h3z"/>
+                        </svg>
+                        <h3 class="text-lg font-semibold">Recursos Humanos</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• Gestión de Empleados</li>
+                        <li>• Planillas y Adelantos</li>
+                        <li>• Control de Préstamos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section class="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Lo que dicen nuestros clientes</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Carlos Mendoza" class="w-12 h-12 rounded-full object-cover mr-4" onerror="this.style.display='none'">
+                        <div>
+                            <h4 class="font-semibold">Carlos Mendoza</h4>
+                            <p class="text-sm text-gray-600">Gerente General, LogiTrans</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"RM POS Logistics transformó completamente nuestra operación. Ahora tenemos control total de nuestras finanzas y operaciones en tiempo real."</p>
+                    <div class="flex text-yellow-400 mt-3">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="María González" class="w-12 h-12 rounded-full object-cover mr-4" onerror="this.style.display='none'">
+                        <div>
+                            <h4 class="font-semibold">María González</h4>
+                            <p class="text-sm text-gray-600">Directora, Express Cargo</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"El portal web para clientes es increíble. Nuestros clientes pueden rastrear sus envíos 24/7 y eso ha mejorado mucho nuestra relación comercial."</p>
+                    <div class="flex text-yellow-400 mt-3">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Roberto Silva" class="w-12 h-12 rounded-full object-cover mr-4" onerror="this.style.display='none'">
+                        <div>
+                            <h4 class="font-semibold">Roberto Silva</h4>
+                            <p class="text-sm text-gray-600">CEO, Rapid Logistics</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"La personalización del sistema se adaptó perfectamente a nuestros procesos. El soporte técnico es excepcional y siempre están disponibles."</p>
+                    <div class="flex text-yellow-400 mt-3">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estadísticas Section -->
+    <section class="py-16 bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Números que nos respaldan</h2>
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-blue-400 mb-2">500+</div>
+                    <p class="text-lg">Empresas Atendidas</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-green-400 mb-2">99.9%</div>
+                    <p class="text-lg">Tiempo de Actividad</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-yellow-400 mb-2">24/7</div>
+                    <p class="text-lg">Soporte Técnico</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold text-purple-400 mb-2">5+</div>
+                    <p class="text-lg">Años de Experiencia</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso de Implementación -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Proceso de Implementación</h2>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-blue-600">1</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Análisis</h3>
+                    <p class="text-gray-600">Evaluamos sus necesidades específicas y procesos actuales</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-green-600">2</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Personalización</h3>
+                    <p class="text-gray-600">Adaptamos el sistema a sus requerimientos únicos</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-yellow-600">3</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Capacitación</h3>
+                    <p class="text-gray-600">Entrenamos a su equipo para usar el sistema eficientemente</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-purple-600">4</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">Soporte</h3>
+                    <p class="text-gray-600">Brindamos soporte continuo y actualizaciones</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Precios Section -->
+    <section id="precios" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Plan de Precios</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-8 rounded-lg shadow-lg">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-4">Desarrollo e Implementación</h3>
+                        <div class="text-4xl font-bold mb-2">L 9,990</div>
+                        <p class="text-blue-100 mb-6">o su equivalente en dólares + ISV</p>
+                        <div class="text-left space-y-3">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Análisis de necesidades</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Personalización del sistema</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Instalación completa</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Capacitación del personal</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Portal web incluido</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-8 rounded-lg shadow-lg">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-4">Mensualidad</h3>
+                        <div class="text-4xl font-bold mb-2">L 1,990</div>
+                        <p class="text-green-100 mb-6">o su equivalente en dólares + ISV</p>
+                        <div class="text-left space-y-3">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Hospedaje en la nube</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Soporte técnico 24/7</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Mantenimiento del sistema</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Actualizaciones incluidas</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Respaldos automáticos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p class="text-gray-600 mb-4">💡 <strong>Nota:</strong> Los precios incluyen todos los módulos del sistema y el portal web de consulta</p>
+                <a href="#contacto" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 inline-block">
+                    Solicitar Cotización Personalizada
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Preguntas Frecuentes</h2>
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">¿Cuánto tiempo toma implementar el sistema?</h3>
+                    <p class="text-gray-600">La implementación típica toma entre 2-4 semanas, dependiendo del tamaño de su empresa y los módulos requeridos.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">¿El sistema funciona sin conexión a internet?</h3>
+                    <p class="text-gray-600">Sí, el sistema puede funcionar localmente y sincronizar datos cuando se restablezca la conexión.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">¿Incluye capacitación para el personal?</h3>
+                    <p class="text-gray-600">Absolutamente. Incluimos capacitación completa para todo su equipo y manuales de usuario detallados.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">¿Qué tipo de soporte técnico ofrecen?</h3>
+                    <p class="text-gray-600">Ofrecemos soporte técnico 24/7 vía WhatsApp, email y llamadas telefónicas para resolver cualquier consulta.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">Contáctanos</h2>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
+                            <input type="text" id="nombre" name="nombre" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="empresa" class="block text-sm font-medium text-gray-700 mb-2">Empresa</label>
+                            <input type="text" id="empresa" name="empresa" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label for="telefono" class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="mensaje" class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition duration-300 font-semibold">
+                        📱 Enviar por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="https://github.com/rimedhn/rmpos/blob/main/LOGO%20RMPOS.jpg?raw=true" alt="RM POS Logistics" class="h-8 w-8 rounded-full object-cover mr-3" onerror="this.style.display='none'">
+                        <span class="text-xl font-bold">RM POS Logistics</span>
+                    </div>
+                    <p class="text-gray-300">Plataforma integral de gestión logística personalizada para empresas modernas.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contacto</h3>
+                    <p class="text-gray-300 mb-2">📧 rmpos.hn@gmail.com</p>
+                    <p class="text-gray-300 mb-4">📱 +504 9359-3126</p>
+                    <div id="social-links" class="flex space-x-4">
+                        <!-- Las redes sociales se mostrarán aquí si tienen enlaces -->
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Desarrollo</h3>
+                    <p class="text-gray-300 mb-2">Desarrollado por:</p>
+                    <p class="text-blue-400 font-semibold">Rimed Digital</p>
+                    <p class="text-gray-300 text-sm">www.rimeddigital.com</p>
+                    <p class="text-gray-300 text-sm">gerencia@rimeddigital.com</p>
+                    <p class="text-gray-300 text-sm">+504 9359-3126</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 RM POS Logistics. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/50493593126?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20RM%20POS%20Logistics%20y%20solicitar%20una%20demostración%20del%20sistema." target="_blank" rel="noopener noreferrer" class="whatsapp-float flex items-center justify-center">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.516"/>
+        </svg>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const empresa = document.getElementById('empresa').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            const whatsappMessage = `Hola, soy ${nombre} de ${empresa}.
+
+📧 Email: ${email}
+📱 Teléfono: ${telefono}
+
+Mensaje: ${mensaje}
+
+Me interesa conocer más sobre RM POS Logistics.`;
+            
+            const whatsappUrl = `https://wa.me/50493593126?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        });
+
+        // Generate PDF proposal function
+        function generateProposal() {
+            // Create a new window with the proposal content
+            const proposalWindow = window.open('', '_blank', 'width=800,height=600');
+            
+            const proposalContent = `
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Propuesta RM POS Logistics</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        margin: 40px;
+                        color: #333;
+                        background: white;
+                    }
+                    .header {
+                        text-align: center;
+                        border-bottom: 3px solid #667eea;
+                        padding-bottom: 20px;
+                        margin-bottom: 30px;
+                    }
+                    .header h1 {
+                        color: #667eea;
+                        font-size: 28px;
+                        margin: 0;
+                    }
+                    .header h2 {
+                        color: #666;
+                        font-size: 18px;
+                        margin: 10px 0 0 0;
+                        font-weight: normal;
+                    }
+                    .section {
+                        margin-bottom: 30px;
+                        page-break-inside: avoid;
+                    }
+                    .section h3 {
+                        color: #667eea;
+                        font-size: 20px;
+                        border-bottom: 2px solid #eee;
+                        padding-bottom: 10px;
+                        margin-bottom: 15px;
+                    }
+                    .section h4 {
+                        color: #444;
+                        font-size: 16px;
+                        margin-top: 20px;
+                        margin-bottom: 10px;
+                    }
+                    .advantages, .modules, .features, .benefits {
+                        list-style: none;
+                        padding: 0;
+                    }
+                    .advantages li, .modules li, .features li, .benefits li {
+                        padding: 8px 0;
+                        border-bottom: 1px solid #f0f0f0;
+                    }
+                    .advantages li:before, .features li:before, .benefits li:before {
+                        content: "✓ ";
+                        color: #667eea;
+                        font-weight: bold;
+                        margin-right: 8px;
+                    }
+                    .modules li:before {
+                        content: "• ";
+                        color: #667eea;
+                        font-weight: bold;
+                        margin-right: 8px;
+                    }
+                    .module-category {
+                        font-weight: bold;
+                        color: #667eea;
+                        margin-top: 15px;
+                    }
+                    .module-items {
+                        margin-left: 20px;
+                        color: #666;
+                    }
+                    .contact-info {
+                        background: #f8f9ff;
+                        padding: 20px;
+                        border-radius: 8px;
+                        border-left: 4px solid #667eea;
+                    }
+                    .footer {
+                        margin-top: 40px;
+                        padding-top: 20px;
+                        border-top: 2px solid #eee;
+                        text-align: center;
+                        color: #666;
+                        font-size: 14px;
+                    }
+                    @media print {
+                        body { margin: 20px; }
+                        .section { page-break-inside: avoid; }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>RM POS LOGISTICS</h1>
+                    <h2>Propuesta de Sistema de Gestión Logística</h2>
+                </div>
+
+                <div class="section">
+                    <h3>RESUMEN EJECUTIVO</h3>
+                    <p>RM POS Logistics es una plataforma integral de gestión de información personalizada diseñada específicamente para empresas de logística. Nuestro sistema incluye un portal web de consulta para el seguimiento de guías de transporte, proporcionando una solución completa y moderna que optimiza todos los procesos operativos y administrativos de su empresa.</p>
+                </div>
+
+                <div class="section">
+                    <h3>VENTAJAS PRINCIPALES</h3>
+                    <ul class="advantages">
+                        <li>Gestión integral de operaciones logísticas</li>
+                        <li>Control financiero completo con caja, facturas y arqueos</li>
+                        <li>Acceso multiplataforma (computadora, tablet, móvil)</li>
+                        <li>Portal web incluido para consulta de guías 24/7</li>
+                        <li>Gestión completa de recursos humanos</li>
+                        <li>Sistema personalizable según necesidades específicas</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>MÓDULOS DEL SISTEMA</h3>
+                    <ul class="modules">
+                        <li class="module-category">OPERACIONES</li>
+                        <li class="module-items">Gestión de Cargas, Manifiestos, Comprobantes</li>
+                        
+                        <li class="module-category">FINANZAS</li>
+                        <li class="module-items">Caja, Facturas, Prefacturas, Arqueos, Cuadres</li>
+                        
+                        <li class="module-category">COBROS Y PAGOS</li>
+                        <li class="module-items">Cobros, Saldos por cobrar</li>
+                        <li class="module-items">Pagos, Saldos por Pagar</li>
+                        
+                        <li class="module-category">GESTIÓN COMERCIAL</li>
+                        <li class="module-items">Clientes, Ventas, Servicios</li>
+                        <li class="module-items">Proveedores, Compras, Productos, Gastos</li>
+                        
+                        <li class="module-category">RECURSOS HUMANOS</li>
+                        <li class="module-items">Empleados, Planillas, Adelantos, Préstamos</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>CARACTERÍSTICAS TÉCNICAS</h3>
+                    <ul class="features">
+                        <li>Acceso desde computadora, tablet y teléfono móvil</li>
+                        <li>Portal web de consulta para seguimiento de guías de transporte</li>
+                        <li>Interfaz intuitiva y fácil de usar</li>
+                        <li>Reportes y estadísticas en tiempo real</li>
+                        <li>Respaldos automáticos de información</li>
+                        <li>Soporte técnico especializado 24/7</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>BENEFICIOS PARA SU EMPRESA</h3>
+                    <ul class="benefits">
+                        <li>Optimización de procesos operativos</li>
+                        <li>Reducción de errores manuales</li>
+                        <li>Mayor control y transparencia financiera</li>
+                        <li>Mejora en la atención al cliente</li>
+                        <li>Acceso a información en tiempo real</li>
+                        <li>Escalabilidad según crecimiento de la empresa</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h3>PROCESO DE IMPLEMENTACIÓN</h3>
+                    <h4>1. Análisis</h4>
+                    <p>Evaluamos sus necesidades específicas y procesos actuales</p>
+                    
+                    <h4>2. Personalización</h4>
+                    <p>Adaptamos el sistema a sus requerimientos únicos</p>
+                    
+                    <h4>3. Capacitación</h4>
+                    <p>Entrenamos a su equipo para usar el sistema eficientemente</p>
+                    
+                    <h4>4. Soporte</h4>
+                    <p>Brindamos soporte continuo y actualizaciones</p>
+                </div>
+
+                <div class="section">
+                    <h3>PLAN DE PRECIOS</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                        <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; border-left: 4px solid #667eea;">
+                            <h4 style="color: #667eea; margin-top: 0;">Desarrollo e Implementación</h4>
+                            <div style="font-size: 24px; font-weight: bold; color: #667eea; margin: 10px 0;">L 9,990</div>
+                            <p style="color: #666; margin-bottom: 15px;">o su equivalente en dólares + ISV</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="padding: 4px 0;">✓ Análisis de necesidades</li>
+                                <li style="padding: 4px 0;">✓ Personalización del sistema</li>
+                                <li style="padding: 4px 0;">✓ Instalación completa</li>
+                                <li style="padding: 4px 0;">✓ Capacitación del personal</li>
+                                <li style="padding: 4px 0;">✓ Portal web incluido</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f0f9f0; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981;">
+                            <h4 style="color: #10b981; margin-top: 0;">Mensualidad</h4>
+                            <div style="font-size: 24px; font-weight: bold; color: #10b981; margin: 10px 0;">L 1,990</div>
+                            <p style="color: #666; margin-bottom: 15px;">o su equivalente en dólares + ISV</p>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="padding: 4px 0;">✓ Hospedaje en la nube</li>
+                                <li style="padding: 4px 0;">✓ Soporte técnico 24/7</li>
+                                <li style="padding: 4px 0;">✓ Mantenimiento del sistema</li>
+                                <li style="padding: 4px 0;">✓ Actualizaciones incluidas</li>
+                                <li style="padding: 4px 0;">✓ Respaldos automáticos</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; text-align: center; color: #666;"><strong>Nota:</strong> Los precios incluyen todos los módulos del sistema y el portal web de consulta</p>
+                </div>
+
+                <div class="section contact-info">
+                    <h3>INFORMACIÓN DE CONTACTO</h3>
+                    <p><strong>RM POS Logistics</strong></p>
+                    <p>📧 Email: rmpos.hn@gmail.com</p>
+                    <p>📱 WhatsApp: +504 9359-3126</p>
+                </div>
+
+                <div class="footer">
+                    <p><strong>Desarrollado por: Rimed Digital</strong></p>
+                    <p>www.rimeddigital.com | gerencia@rimeddigital.com | +504 9359-3126</p>
+                    <p>&copy; 2024 RM POS Logistics. Todos los derechos reservados.</p>
+                </div>
+            </body>
+            </html>
+            `;
+            
+            proposalWindow.document.write(proposalContent);
+            proposalWindow.document.close();
+            
+            // Auto-trigger print dialog after content loads
+            proposalWindow.onload = function() {
+                setTimeout(() => {
+                    proposalWindow.print();
+                }, 500);
+            };
+        }
+
+        // Social media links (only show if they have actual links)
+        const socialLinks = {
+            facebook: '', // Add Facebook URL here if available
+            instagram: '', // Add Instagram URL here if available
+            twitter: '', // Add X (Twitter) URL here if available
+            tiktok: '' // Add TikTok URL here if available
+        };
+
+        function createSocialLinks() {
+            const socialContainer = document.getElementById('social-links');
+            const socialIcons = {
+                facebook: '📘',
+                instagram: '📷',
+                twitter: '🐦',
+                tiktok: '🎵'
+            };
+
+            Object.entries(socialLinks).forEach(([platform, url]) => {
+                if (url && url.trim() !== '') {
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.className = 'text-2xl hover:text-blue-400 transition duration-300';
+                    link.textContent = socialIcons[platform];
+                    link.title = platform.charAt(0).toUpperCase() + platform.slice(1);
+                    socialContainer.appendChild(link);
+                }
+            });
+        }
+
+        // Initialize social links
+        createSocialLinks();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'993b8f34233b353a',t:'MTc2MTMzMDc3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
