@@ -526,7 +526,7 @@
                     <div class="text-3xl font-bold text-brand-purple mb-2">
                         <span id="basicPrice">L899</span><span class="text-lg text-gray-600" id="basicPeriod">/mes</span>
                     </div>
-                    <p class="text-gray-600 mb-6">Implementación: L2,990</p>
+                    <p class="text-gray-600 mb-6">Implementación: L5,990</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 2 usuarios incluidos</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Control de inventarios</li>
@@ -534,7 +534,7 @@
                         <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin facturación fiscal</li>
                         <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin preventas/cotizaciones</li>
                         <li class="flex items-center"><i class="fas fa-times text-red-500 mr-2"></i> Sin tienda en línea</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L350/mes</li>
                     </ul>
                     <button onclick="selectPlan('Básico')" class="w-full bg-gray-600 text-white py-3 rounded-lg hover:bg-gray-700 transition">
                         Seleccionar Plan
@@ -550,14 +550,14 @@
                     <div class="text-3xl font-bold text-brand-purple mb-2">
                         <span id="premiumPrice">L990</span><span class="text-lg text-gray-600" id="premiumPeriod">/mes</span>
                     </div>
-                    <p class="text-gray-600 mb-6">Implementación: L5,990</p>
+                    <p class="text-gray-600 mb-6">Implementación: L8,990</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 3 usuarios incluidos</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Facturación fiscal CAI</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Preventas y cotizaciones</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tienda en línea</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Plataforma desarrollada</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L350/mes</li>
                     </ul>
                     <button onclick="selectPlan('Premium')" class="w-full bg-brand-purple text-white py-3 rounded-lg hover:bg-brand-purple-dark transition">
                         Seleccionar Plan
@@ -570,14 +570,14 @@
                     <div class="text-3xl font-bold text-brand-purple mb-2">
                         <span id="customPrice">L1,499</span><span class="text-lg text-gray-600" id="customPeriod">/mes</span>
                     </div>
-                    <p class="text-gray-600 mb-6">Desarrollo: L8,990</p>
+                    <p class="text-gray-600 mb-6">Desarrollo: L10,990</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 3 usuarios incluidos</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Desarrollo personalizado</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Funcionalidades específicas</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Tienda en línea</li>
                         <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Facturación fiscal CAI</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L300/mes</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Usuarios adicionales: L350/mes</li>
                     </ul>
                     <button onclick="selectPlan('Personalizado')" class="w-full bg-brand-purple text-white py-3 rounded-lg hover:bg-brand-purple-dark transition">
                         Seleccionar Plan
@@ -631,7 +631,7 @@
                         </div>
                         <div class="border-t pt-4 mt-4">
                             <div class="text-3xl font-bold text-brand-purple" id="totalPrice">L899/mes</div>
-                            <div class="text-lg text-gray-600" id="implementationCost">+ L2,990 implementación</div>
+                            <div class="text-lg text-gray-600" id="implementationCost">+ L5,990 implementación</div>
                         </div>
                     </div>
                 </div>
@@ -1028,14 +1028,14 @@
             const isAnnual = document.getElementById('annualPayment').checked;
 
             let basePrices = {
-                'basico': { monthly: 899, implementation: 2990, includedUsers: 3 },
-                'premium': { monthly: 990, implementation: 5990, includedUsers: 3 },
-                'personalizado': { monthly: 1499, implementation: 5990, includedUsers: 3 }
+                'basico': { monthly: 899, implementation: 5990, includedUsers: 3 },
+                'premium': { monthly: 990, implementation: 8990, includedUsers: 3 },
+                'personalizado': { monthly: 1499, implementation: 10990, includedUsers: 3 }
             };
 
             const selectedPlan = basePrices[planSelect];
             const planCostPerBranch = selectedPlan.monthly * branches;
-            const additionalUserCost = additionalUsers * 300;
+            const additionalUserCost = additionalUsers * 350;
             const monthlyTotal = planCostPerBranch + additionalUserCost;
             const annualTotal = isAnnual ? monthlyTotal * 10 : monthlyTotal * 12;
             const totalIncludedUsers = branches * 3;
@@ -1062,15 +1062,15 @@
             const paymentMode = document.getElementById('paymentMode').value;
 
             let basePrices = {
-                'Plan Básico': { monthly: 899, implementation: 2990 },
-                'Plan Premium': { monthly: 990, implementation: 5990 },
-                'Plan Personalizado': { monthly: 1499, implementation: 5990 }
+                'Plan Básico': { monthly: 899, implementation: 5990 },
+                'Plan Premium': { monthly: 990, implementation: 8990 },
+                'Plan Personalizado': { monthly: 1499, implementation: 10990 }
             };
 
             if (selectedPlan && basePrices[selectedPlan]) {
                 const plan = basePrices[selectedPlan];
                 const planCostPerBranch = plan.monthly * branches;
-                const additionalUserCost = additionalUsers * 300;
+                const additionalUserCost = additionalUsers * 350;
                 const monthlyTotal = planCostPerBranch + additionalUserCost;
                 const isAnnual = paymentMode === 'Anual';
                 const annualTotal = isAnnual ? monthlyTotal * 10 : monthlyTotal * 12;
